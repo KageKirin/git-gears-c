@@ -1,6 +1,7 @@
 #ifndef GITCGEARS_UTIL_H_INC
 #define GITCGEARS_UTIL_H_INC
 #include <stdio.h>
+#include <string.h>
 
 
 /// printing functions
@@ -46,5 +47,13 @@
 #define gearsio_bg_bright_magenta gearsio_bg_magenta";1m"
 #define gearsio_bg_bright_cyan    gearsio_bg_cyan";1m"
 #define gearsio_bg_bright_white   gearsio_bg_white";1m"
+
+
+/// array utils
+#define ARRAY_COUNT(arr) (sizeof((arr))/sizeof((arr)[0]))
+
+/// string utils
+#define STRING_EQUALS(a, b) (strcmp((a),(b)) == 0)
+
 
 #endif  //GITCGEARS_UTIL_H_INC
