@@ -1,0 +1,4 @@
+## .gitignore for git-cgears
+
+.build
+.vscode
