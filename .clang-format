@@ -7,3 +7,8 @@ UseTab: Always
 Language: Cpp
 BreakBeforeBraces: Allman
 FixNamespaceComments: true
+#DerivePointerAlignment: true
+PointerAlignment: Left
+ColumnLimit: 120
+MaxEmptyLinesToKeep: 2
+AlignTrailingComments: true
