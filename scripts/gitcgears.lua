@@ -130,6 +130,10 @@ core_projects = {
 				build_c99()
 				add_packages(external_scaffolds)
 
+				includedirs {
+					"../src",
+				}
+
 				files {
 					"../src/**.h",
 					"../src/**.c",
@@ -191,7 +195,7 @@ create_packages_projects(core_projects)
 
 	if _ACTION == "clean" then
 		os.rmdir("bin")
-		os.rmdir("build")
+		os.rmdir(".build")
 	end
 
 -------------------------------------------------------------------------------
