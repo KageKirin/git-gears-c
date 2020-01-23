@@ -1,9 +1,9 @@
-#include <stdio.h>
 #include <curl/curl.h>
 #include <git2.h>
+#include <stdio.h>
 
-#include "gears_util.h"
 #include "gears_action.h"
+#include "gears_util.h"
 
 int Help(int argc, char** argv);
 int CreateGist(int argc, char** argv);
@@ -19,7 +19,6 @@ int ListIssues(int argc, char** argv);
 int ListProjects(int argc, char** argv);
 int ListPullRequests(int argc, char** argv);
 int Foobar(int argc, char** argv);
-
 
 static Action actions[] = {
 	// clang-format off
@@ -47,12 +46,11 @@ int main(int argc, char** argv)
 	program_name = argv[0];
 	if (argc > 1)
 	{
-		gears_println("argc: %i, argv[1]: %s", argc, argv[1]);
-		for(int i = 0; i < ARRAY_COUNT(actions); ++i)
+		for (int i = 0; i < ARRAY_COUNT(actions); ++i)
 		{
 			if (STRING_EQUALS(actions[i].verb, argv[1]))
 			{
-				return actions[i].call(argc-1, argv+1);
+				return actions[i].call(argc - 1, argv + 1);
 			}
 		}
 
@@ -64,13 +62,12 @@ int main(int argc, char** argv)
 	return Help(argc, argv);
 }
 
-
 int Help(int argc, char** argv)
 {
-	static char* argv_help[] = { "--help" };
+	static char* argv_help[] = {"--help"};
 	if (argc > 1)
 	{
-		for(int i = 1; i < ARRAY_COUNT(actions); ++i) //skip help
+		for (int i = 1; i < ARRAY_COUNT(actions); ++i) // skip help
 		{
 			if (STRING_EQUALS(actions[i].verb, argv[1]))
 			{
@@ -84,12 +81,14 @@ int Help(int argc, char** argv)
 	gears_println("call `git cgears <action> [options] [remote] [branch]`\n", NULL);
 	gears_println("<action> be one of the following %lu:", ARRAY_COUNT(actions));
 
-	for(size_t i = 0; i < ARRAY_COUNT(actions); ++i)
+	for (size_t i = 0; i < ARRAY_COUNT(actions); ++i)
 	{
 		gears_println("\t%-20s\t%s", actions[i].verb, actions[i].desc);
 	}
 
-	gears_println("\nto get information about a specific action: `git cgears help <action>` or `git chears <action> --help`", NULL);
+	gears_println("\nto get information about a specific action:\n"
+				  "`git cgears help <action>` or `git cgears <action> --help`",
+				  NULL);
 
 	return 0;
 }
