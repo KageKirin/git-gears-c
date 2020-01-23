@@ -127,6 +127,7 @@ core_projects = {
 					"StaticRuntime"
 				}
 
+				build_c99()
 				add_packages(external_scaffolds)
 
 				files {
