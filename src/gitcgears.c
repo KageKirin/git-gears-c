@@ -22,6 +22,7 @@ int Foobar(int argc, char** argv);
 
 
 static Action actions[] = {
+	// clang-format off
 	{ "help",               "prints this message",                                 &Help }, //must be top
 	{ "foobar",             "foos the bar",                                        &Foobar },
 
@@ -37,6 +38,7 @@ static Action actions[] = {
 	{ "list-projects",      "lists up the projects available to the user",         &ListProjects },
 	{ "list-issues",        "lists up the issues for this project/remote",         &ListIssues },
 	{ "list-pullrequests",  "lists up the pull requests for this project/remote",  &ListPullRequests },
+	// clang-format on
 };
 
 static char* program_name;
