@@ -39,8 +39,10 @@ static Action actions[] = {
 	{ "list-pullrequests",  "lists up the pull requests for this project/remote",  &ListPullRequests },
 };
 
+static char* program_name;
 int main(int argc, char** argv)
 {
+	program_name = argv[0];
 	if (argc > 1)
 	{
 		gears_println("argc: %i, argv[1]: %s", argc, argv[1]);
@@ -76,11 +78,16 @@ int Help(int argc, char** argv)
 		gears_println("No such action '%s'", argv[1]);
 	}
 
-	gears_println("generic help", NULL);
-	for(int i = 0; i < ARRAY_COUNT(actions); ++i)
+	gears_println("%s", program_name);
+	gears_println("call `git cgears <action> [options] [remote] [branch]`\n", NULL);
+	gears_println("<action> be one of the following %lu:", ARRAY_COUNT(actions));
+
+	for(size_t i = 0; i < ARRAY_COUNT(actions); ++i)
 	{
-		gears_println("%-30s\t%s", actions[i].verb, actions[i].desc);
+		gears_println("\t%-20s\t%s", actions[i].verb, actions[i].desc);
 	}
+
+	gears_println("\nto get information about a specific action: `git cgears help <action>` or `git chears <action> --help`", NULL);
 
 	return 0;
 }
