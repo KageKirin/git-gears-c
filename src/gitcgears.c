@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 	program_name = argv[0];
 	if (argc > 1)
 	{
-		for (int i = 0; i < ARRAY_COUNT(actions); ++i)
+		for (size_t i = 0; i < ARRAY_COUNT(actions); ++i)
 		{
 			if (STRING_EQUALS(actions[i].verb, argv[1]))
 			{
@@ -67,7 +67,7 @@ int Help(int argc, char** argv)
 	static char* argv_help[] = {"--help"};
 	if (argc > 1)
 	{
-		for (int i = 1; i < ARRAY_COUNT(actions); ++i) // skip help
+		for (size_t i = 1; i < ARRAY_COUNT(actions); ++i) // skip help
 		{
 			if (STRING_EQUALS(actions[i].verb, argv[1]))
 			{
