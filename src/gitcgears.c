@@ -6,11 +6,37 @@
 #include "gears_action.h"
 
 int Help(int argc, char** argv);
+int CreateGist(int argc, char** argv);
+int CreateIssue(int argc, char** argv);
+int CreateProject(int argc, char** argv);
+int CreatePullRequest(int argc, char** argv);
+int GetGist(int argc, char** argv);
+int GetIssue(int argc, char** argv);
+int GetProject(int argc, char** argv);
+int GetPullRequest(int argc, char** argv);
+int ListGists(int argc, char** argv);
+int ListIssues(int argc, char** argv);
+int ListProjects(int argc, char** argv);
+int ListPullRequests(int argc, char** argv);
 int Foobar(int argc, char** argv);
 
+
 static Action actions[] = {
-	{ "help", "prints this message", &Help }, //must be top
-	{ "foobar", "foos the bar", &Foobar },
+	{ "help",               "prints this message",                                 &Help }, //must be top
+	{ "foobar",             "foos the bar",                                        &Foobar },
+
+	{ "create-gist",        "creates a new gist",                                  &CreateGist },
+	{ "create-project",     "creates a new project",                               &CreateProject },
+	{ "create-issue",       "creates a new issue",                                 &CreateIssue },
+	{ "create-pullrequest", "creates a new pullrequest",                           &CreatePullRequest },
+	{ "get-gist",           "retrieves the gist given its ID",                     &GetGist },
+	{ "get-project",        "retrieves the project info given its remote",         &GetProject },
+	{ "get-issue",          "retrieves the issue given its number",                &GetIssue },
+	{ "get-pullrequest",    "retrieves the pull request given its number",         &GetPullRequest },
+	{ "list-gists",         "lists up the gists available to the user",            &ListGists },
+	{ "list-projects",      "lists up the projects available to the user",         &ListProjects },
+	{ "list-issues",        "lists up the issues for this project/remote",         &ListIssues },
+	{ "list-pullrequests",  "lists up the pull requests for this project/remote",  &ListPullRequests },
 };
 
 int main(int argc, char** argv)
@@ -53,19 +79,8 @@ int Help(int argc, char** argv)
 	gears_println("generic help", NULL);
 	for(int i = 0; i < ARRAY_COUNT(actions); ++i)
 	{
-		gears_println("%s\t%s", actions[i].verb, actions[i].desc);
+		gears_println("%-30s\t%s", actions[i].verb, actions[i].desc);
 	}
 
-	return 0;
-}
-
-//--
-
-int Foobar(int argc, char** argv)
-{
-	gears_println("foobar doing stuff", NULL);
-	//getopt or my own implementation to parse arguments
-	//implementation of action
-	//result display
 	return 0;
 }
