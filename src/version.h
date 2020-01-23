@@ -1,0 +1,2 @@
+#define GITCGEARS_VERSION 9
+#define GITCGEARS_VERSION_STR "version 9 (commit 374ecc7ea281a86d21fd508e8561104529f0c5d2)"
