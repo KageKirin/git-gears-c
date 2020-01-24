@@ -40,10 +40,14 @@ static Action actions[] = {
 	// clang-format on
 };
 
+void clean_exit();
 static char* program_name;
 int main(int argc, char** argv)
 {
 	program_name = argv[0];
+	atexit(clean_exit);
+	git_libgit2_init();
+
 	if (argc > 1)
 	{
 		for (size_t i = 0; i < ARRAY_COUNT(actions); ++i)
@@ -60,6 +64,11 @@ int main(int argc, char** argv)
 	}
 
 	return Help(argc, argv);
+}
+
+void clean_exit()
+{
+	git_libgit2_shutdown();
 }
 
 int Help(int argc, char** argv)
