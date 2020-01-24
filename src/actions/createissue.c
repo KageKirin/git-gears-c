@@ -2,7 +2,7 @@
 
 int CreateIssue(int argc, char** argv)
 {
-	gears_println("foobar doing stuff", NULL);
+	gears_println("create-issue doing stuff", NULL);
 	// getopt or my own implementation to parse arguments
 	// implementation of action
 	// result display
