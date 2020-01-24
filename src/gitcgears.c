@@ -6,6 +6,7 @@
 #include "gears_util.h"
 
 int Help(int argc, char** argv);
+int CheckConfig(int argc, char** argv);
 int CreateGist(int argc, char** argv);
 int CreateIssue(int argc, char** argv);
 int CreateProject(int argc, char** argv);
@@ -24,6 +25,7 @@ int Foobar(int argc, char** argv);
 static Action actions[] = {
 	// clang-format off
 	{ "help",               "prints this message",                                 &Help }, //must be top
+	{ "check-config",       "verifies the git config for 'gears' settings for the given remote", &CheckConfig },
 	{ "get-user",           "retrieves the user information for a given remote",   &GetUser },
 
 	// test
