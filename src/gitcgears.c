@@ -10,6 +10,7 @@ int CreateGist(int argc, char** argv);
 int CreateIssue(int argc, char** argv);
 int CreateProject(int argc, char** argv);
 int CreatePullRequest(int argc, char** argv);
+int GetUser(int argc, char** argv);
 int GetGist(int argc, char** argv);
 int GetIssue(int argc, char** argv);
 int GetProject(int argc, char** argv);
@@ -23,8 +24,12 @@ int Foobar(int argc, char** argv);
 static Action actions[] = {
 	// clang-format off
 	{ "help",               "prints this message",                                 &Help }, //must be top
+	{ "get-user",           "retrieves the user information for a given remote",   &GetUser },
+
+	// test
 	{ "foobar",             "foos the bar",                                        &Foobar },
 
+	// gears actions
 	{ "create-gist",        "creates a new gist",                                  &CreateGist },
 	{ "create-project",     "creates a new project",                               &CreateProject },
 	{ "create-issue",       "creates a new issue",                                 &CreateIssue },
