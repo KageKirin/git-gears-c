@@ -94,6 +94,10 @@ local external_scaffolds = {
 	--keep
 	--this
 	--line
+	['pcre2'] = dofile(path.join(rootpath, "libs", "pcre2.lua")),
+	--keep
+	--this
+	--line
 }
 
 create_packages_projects(external_scaffolds)
