@@ -43,7 +43,7 @@ return {
 	end,
 
 	_add_self_links = function()
-		links { "pcre2" }
+		links { "pcre2-posix" }
 	end,
 
 	_create_projects = function()
