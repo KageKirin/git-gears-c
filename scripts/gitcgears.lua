@@ -48,7 +48,7 @@ local locationpath = path.join(os.getcwd(), _OPTIONS["to"] or path.join('build/p
 local targetpath   = path.join(locationpath, '../bin')
 local objectpath   = path.join(locationpath, '../obj')
 
-	solution "pokeass"
+	solution "gitcgears"
 		configurations {
 			"Debug",
 			"Release"
