@@ -48,7 +48,7 @@ local locationpath = path.join(os.getcwd(), _OPTIONS["to"] or path.join('build/p
 local targetpath   = path.join(locationpath, '../bin')
 local objectpath   = path.join(locationpath, '../obj')
 
-	solution "pokeass"
+	solution "gitcgears"
 		configurations {
 			"Debug",
 			"Release"
@@ -127,7 +127,12 @@ core_projects = {
 					"StaticRuntime"
 				}
 
+				build_c99()
 				add_packages(external_scaffolds)
+
+				includedirs {
+					"../src",
+				}
 
 				files {
 					"../src/**.h",
@@ -190,7 +195,7 @@ create_packages_projects(core_projects)
 
 	if _ACTION == "clean" then
 		os.rmdir("bin")
-		os.rmdir("build")
+		os.rmdir(".build")
 	end
 
 -------------------------------------------------------------------------------
