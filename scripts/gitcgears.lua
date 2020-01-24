@@ -82,7 +82,7 @@ local external_scaffolds = {
 	--keep
 	--this
 	--line
-	['libcurl'] = dofile(path.join(rootpath, "libs", "libcurl.lua")),
+	['curl'] = dofile(path.join(rootpath, "libs", "curl.lua")),
 	--keep
 	--this
 	--line

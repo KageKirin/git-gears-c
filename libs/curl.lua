@@ -1,10 +1,10 @@
--- genie scaffold for libcurl
+-- genie scaffold for curl
 
-libcurl_script = path.getabsolute(path.getdirectory(_SCRIPT))
+curl_script = path.getabsolute(path.getdirectory(_SCRIPT))
 
 local function get_curl_path()
-	if os.isdir(path.join(libcurl_script, "curl")) then
-		return path.join(libcurl_script, "curl")
+	if os.isdir(path.join(curl_script, "curl")) then
+		return path.join(curl_script, "curl")
 	elseif os.isdir("/usr/local/opt/curl") then
 		-- macOS path when installed with brew
 		return "/usr/local/opt/curl"
@@ -17,35 +17,35 @@ local function get_curl_path()
 	end
 end
 
-libcurl_root = get_curl_path()
+curl_root = get_curl_path()
 
-libcurl_includedirs = {
-	path.join(libcurl_root, "include")
+curl_includedirs = {
+	path.join(curl_root, "include")
 }
 
-libcurl_libdirs = {
-	path.join(libcurl_root, "lib")
+curl_libdirs = {
+	path.join(curl_root, "lib")
 }
 
-libcurl_links = {}
-libcurl_defines = {}
+curl_links = {}
+curl_defines = {}
 
 ----
 return {
 	_add_includedirs = function()
-		includedirs { libcurl_includedirs }
+		includedirs { curl_includedirs }
 	end,
 
 	_add_defines = function()
-		defines { libcurl_defines }
+		defines { curl_defines }
 	end,
 
 	_add_libdirs = function()
-		libdirs { libcurl_libdirs }
+		libdirs { curl_libdirs }
 	end,
 
 	_add_external_links = function()
-		links { libcurl_links }
+		links { curl_links }
 	end,
 
 	_add_self_links = function()
