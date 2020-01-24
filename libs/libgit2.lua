@@ -1,7 +1,16 @@
 -- genie scaffold for libgit2
 
 libgit2_script = path.getabsolute(path.getdirectory(_SCRIPT))
-libgit2_root = "/usr/local/opt/libgit2" -- macOS path when installed with brew
+
+local function get_libgit2_path()
+	if os.isdir(path.join(libgit2_script, "libgit2")) then
+		return path.join(libgit2_script, "libgit2")
+	elseif os.isdir("/usr/local/opt/libgit2") then
+		return "/usr/local/opt/libgit2" -- macOS path when installed with brew
+	end
+end
+
+libgit2_root = get_libgit2_path()
 
 libgit2_includedirs = {
 	path.join(libgit2_root, "include")
