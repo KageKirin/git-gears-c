@@ -1,7 +1,23 @@
 -- genie scaffold for libcurl
 
 libcurl_script = path.getabsolute(path.getdirectory(_SCRIPT))
-libcurl_root = "/usr/local/opt/curl" -- macOS path when installed with brew
+
+local function get_curl_path()
+	if os.isdir(path.join(libcurl_script, "curl")) then
+		return path.join(libcurl_script, "curl")
+	elseif os.isdir("/usr/local/opt/curl") then
+		-- macOS path when installed with brew
+		return "/usr/local/opt/curl"
+	elseif os.isdir("/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr") then
+		--macOS command line tools
+		return "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
+	elseif os.isdir("/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr") then
+		--macOS XCode
+		return "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+	end
+end
+
+libcurl_root = get_curl_path()
 
 libcurl_includedirs = {
 	path.join(libcurl_root, "include")
