@@ -7,7 +7,7 @@
 //! 'consumes' following arguments
 //! modifies values pointed to by argc, argv passed into it
 //! returns number of arguments consumed
-typedef int (^OptionFuncPtr)(int*, char***); // int* argc, char*** argv
+typedef void (*OptionFuncPtr)(int*, char***); // int* argc, char*** argv
 
 //! structure for option
 //! a 'named' callback

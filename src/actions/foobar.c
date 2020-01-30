@@ -32,17 +32,17 @@ static struct {
 	.argument2 = "master",
 };
 
+int Foobar(int argc, char** argv)
+{
 static Option options[] = {
-	{ 'e', "explicit", "explicitly set value", ^ int(int* argc, char*** argv){ OptionValues.explicit_value = atoi(*argv[1]); *argc -= 2; *argv+=2; return 2;}},
-	{ 'i', "implicit", "implicitly set value", ^ int(int* argc, char*** argv){ OptionValues.implicit_value = 1; *argc -= 1; *argv+=1; return 1;}},
-	{ 's', "string", "string value", ^ int(int* argc, char*** argv){ OptionValues.string_value = *argv[1]; *argc -= 2; *argv+=2; return 2;}},
-	{ .description = "argument value 1", ^ int(int* argc, char*** argv){ OptionValues.argument1 = *argv[0]; *argc-=1; *argv+=1; return 1;}},
-	{ .description = "argument value 2", ^ int(int* argc, char*** argv){ OptionValues.argument2 = *argv[0]; *argc-=1; *argv+=1; return 1;}},
+	{ 'e', "explicit", "explicitly set value", ({int fn(int*pargc, char***pargv){ OptionValues.explicit_value = atoi(*pargv[1]); *pargc -= 2; *pargv+=2; } fn;})},
+	{ 'i', "implicit", "implicitly set value", ({int fn(int*pargc, char***pargv){ OptionValues.implicit_value = 1; *pargc -= 1; *pargv+=1; } fn;})},
+	{ 's', "string", "string value", ({int fn(int*pargc, char***pargv){ OptionValues.string_value = *pargv[1]; *pargc -= 2; *pargv+=2; } fn;})},
+	{ .description = "argument value 1", ({int fn(int*pargc, char***pargv){ OptionValues.argument1 = *pargv[0]; *pargc-=1; *pargv+=1; } fn;})},
+	{ .description = "argument value 2", ({int fn(int*pargc, char***pargv){ OptionValues.argument2 = *pargv[0]; *pargc-=1; *pargv+=1; } fn;})},
 };
 
 
-int Foobar(int argc, char** argv)
-{
 	gears_println("foobar doing stuff", NULL);
 
 	gears_println("explicit_value: %i", OptionValues.explicit_value);
