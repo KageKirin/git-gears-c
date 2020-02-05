@@ -7,7 +7,15 @@
 //! 'consumes' following arguments
 //! modifies values pointed to by argc, argv passed into it
 //! returns number of arguments consumed
-typedef int (^OptionFuncPtr)(int*, char***); // int* argc, char*** argv
+typedef int (*OptionFuncPtr)(void* value, int*, char***); // int* argc, char*** argv
+
+int gears_setOptionImplicit(void* value, int* argc, char*** argv);
+int gears_setOptionExplicitInt(void* value, int* argc, char*** argv);
+int gears_setOptionExplicitFloat(void* value, int* argc, char*** argv);
+int gears_setOptionExplicitString(void* value, int* argc, char*** argv);
+int gears_setOptionPositionalInt(void* value, int* argc, char*** argv);
+int gears_setOptionPositionalFloat(void* value, int* argc, char*** argv);
+int gears_setOptionPositionalString(void* value, int* argc, char*** argv);
 
 //! structure for option
 //! a 'named' callback
@@ -16,6 +24,7 @@ typedef struct Option
 	const char shortname;	 //< single char short option. e.g. '-o'
 	const char* longname;	 //< multi-char long option. e.g. '--option'
 	const char* description; //< description for help text
+	void* const value;		 //< pointer to value
 	OptionFuncPtr consume;	 //< callback to consume arguments coming after
 } Option;
 
