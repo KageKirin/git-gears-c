@@ -33,11 +33,11 @@ static struct {
 };
 
 static Option options[] = {
-	{ 'e', "explicit", "explicitly set value", ^ int(int* argc, char*** argv){ OptionValues.explicit_value = atoi(*argv[1]); *argc -= 2; *argv+=2; return 2;}},
-	{ 'i', "implicit", "implicitly set value", ^ int(int* argc, char*** argv){ OptionValues.implicit_value = 1; *argc -= 1; *argv+=1; return 1;}},
-	{ 's', "string", "string value", ^ int(int* argc, char*** argv){ OptionValues.string_value = *argv[1]; *argc -= 2; *argv+=2; return 2;}},
-	{ .description = "argument value 1", ^ int(int* argc, char*** argv){ OptionValues.argument1 = *argv[0]; *argc-=1; *argv+=1; return 1;}},
-	{ .description = "argument value 2", ^ int(int* argc, char*** argv){ OptionValues.argument2 = *argv[0]; *argc-=1; *argv+=1; return 1;}},
+	{ 'e', "explicit", "explicitly set value", &OptionValues.explicit_value, gears_setOptionExplicit },
+	{ 'i', "implicit", "implicitly set value", &OptionValues.implicit_value, gears_setOptionImplicit },
+	{ 's', "string", "string value", &OptionValues.string_value, gears_setOptionExplicitS },
+	{ .description = "argument value 1", &OptionValues.argument1, gears_setOptionPositionalS },
+	{ .description = "argument value 2", &OptionValues.argument2, gears_setOptionPositionalS },
 };
 
 
