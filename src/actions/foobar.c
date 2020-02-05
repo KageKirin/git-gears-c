@@ -33,11 +33,11 @@ static struct {
 };
 
 static Option options[] = {
-	{ 'e', "explicit", "explicitly set value", &OptionValues.explicit_value, gears_setOptionExplicit },
-	{ 'i', "implicit", "implicitly set value", &OptionValues.implicit_value, gears_setOptionImplicit },
-	{ 's', "string", "string value", &OptionValues.string_value, gears_setOptionExplicitS },
-	{ .description = "argument value 1", &OptionValues.argument1, gears_setOptionPositionalS },
-	{ .description = "argument value 2", &OptionValues.argument2, gears_setOptionPositionalS },
+	{ 'e', "explicit", "explicitly set value", &OptionValues.explicit_value, gears_option_Explicit },
+	{ 'i', "implicit", "implicitly set value", &OptionValues.implicit_value, gears_option_Implicit },
+	{ 's', "string", "string value", &OptionValues.string_value, gears_option_ExplicitString },
+	{ .description = "argument value 1", &OptionValues.argument1, gears_option_PositionalString },
+	{ .description = "argument value 2", &OptionValues.argument2, gears_option_PositionalString },
 };
 
 

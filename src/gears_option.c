@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 int parse_options(const Option* options, unsigned options_count, int argc, char** argv)
 {
 	// parse actual options (-, --) until '--' encountered or
@@ -21,7 +20,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 			{
 				if (options[i].shortname == arg)
 				{
-					options[i].consume(options[i].value, &argc, &argv);
+					options[i].consume.function(options[i].value, &argc, &argv);
 					break;
 				}
 			}
@@ -34,7 +33,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 			{
 				if (STRING_EQUALS(options[i].longname, arg))
 				{
-					options[i].consume(options[i].value, &argc, &argv);
+					options[i].consume.function(options[i].value, &argc, &argv);
 					break;
 				}
 			}
@@ -60,7 +59,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 		{
 			if (options[i].shortname == 0 && options[i].longname == NULL)
 			{
-				options[i].consume(options[i].value, &argc, &argv);
+				options[i].consume.function(options[i].value, &argc, &argv);
 			}
 		}
 	}
@@ -68,7 +67,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 }
 
 
-int gears_setOptionExplicit(void* value, int* argc, char*** argv)
+static int gears_setOptionExplicit(void* value, int* argc, char*** argv)
 {
 	gears_tag();
 	*(int*)value = atoi((*argv)[1]);
@@ -77,8 +76,10 @@ int gears_setOptionExplicit(void* value, int* argc, char*** argv)
 	return 2;
 	gears_tag();
 }
+OptionConsumer gears_option_Explicit = {.function = gears_setOptionExplicit};
 
-int gears_setOptionImplicit(void* value, int* argc, char*** argv)
+
+static int gears_setOptionImplicit(void* value, int* argc, char*** argv)
 {
 	gears_tag();
 	*(int*)value = 1;
@@ -86,8 +87,10 @@ int gears_setOptionImplicit(void* value, int* argc, char*** argv)
 	*argv += 1;
 	return 1;
 }
+OptionConsumer gears_option_Implicit = {.function = gears_setOptionImplicit};
 
-int gears_setOptionExplicitS(void* value, int* argc, char*** argv)
+
+static int gears_setOptionExplicitString(void* value, int* argc, char*** argv)
 {
 	gears_tag();
 	*(char**)value = (*argv)[1];
@@ -95,8 +98,21 @@ int gears_setOptionExplicitS(void* value, int* argc, char*** argv)
 	*argv += 2;
 	return 2;
 }
+OptionConsumer gears_option_ExplicitString = {.function = gears_setOptionExplicitString};
 
-int gears_setOptionPositionalS(void* value, int* argc, char*** argv)
+
+static int gears_setOptionPositional(void* value, int* argc, char*** argv)
+{
+	gears_tag();
+	*(int*)value = atoi((*argv)[0]);
+	*argc -= 1;
+	*argv += 1;
+	return 1;
+}
+OptionConsumer gears_option_Positional = {.function = gears_setOptionPositional};
+
+
+static int gears_setOptionPositionalString(void* value, int* argc, char*** argv)
 {
 	gears_tag();
 	*(char**)value = (*argv)[0];
@@ -104,3 +120,4 @@ int gears_setOptionPositionalS(void* value, int* argc, char*** argv)
 	*argv += 1;
 	return 1;
 }
+OptionConsumer gears_option_PositionalString = {.function = gears_setOptionPositionalString};
