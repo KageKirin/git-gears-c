@@ -23,6 +23,8 @@ static struct {
 	int implicit_value;
 	float float_value;
 	char* string_value;
+	int short_option;
+	int long_option;
 	char* argument1;
 	char* argument2;
 	int argument3;
@@ -32,6 +34,8 @@ static struct {
 	.implicit_value = 0,
 	.float_value = 0.0f,
 	.string_value = NULL,
+	.short_option = 0,
+	.long_option = 0,
 	.argument1 = "origin",
 	.argument2 = "master",
 	.argument3 = 0,
@@ -43,6 +47,8 @@ static Option options[] = {
 	{ 'i', "implicit", "implicitly set int value", &OptionValues.implicit_value, gears_setOptionImplicit },
 	{ 'f', "float", "explicitely set float value", &OptionValues.float_value, gears_setOptionExplicitFloat },
 	{ 's', "string", "explicitely set string value", &OptionValues.string_value, gears_setOptionExplicitString },
+	{ 'x', 0, "short option only int", &OptionValues.short_option, gears_setOptionExplicitInt },
+	{ 0, "longopt", "long option only int", &OptionValues.long_option, gears_setOptionExplicitInt },
 	{ .description = "argument value 1 (string)", &OptionValues.argument1, gears_setOptionPositionalString },
 	{ .description = "argument value 2 (string)", &OptionValues.argument2, gears_setOptionPositionalString },
 	{ .description = "argument value 3 (int)", &OptionValues.argument3, gears_setOptionPositionalInt },
@@ -58,6 +64,8 @@ int Foobar(int argc, char** argv)
 	gears_println("implicit_value: %i", OptionValues.implicit_value);
 	gears_println("float_value: %f", OptionValues.float_value);
 	gears_println("string_value: %s", OptionValues.string_value);
+	gears_println("short_option: %i", OptionValues.short_option);
+	gears_println("long_option: %i", OptionValues.long_option);
 	gears_println("argument1: %s", OptionValues.argument1);
 	gears_println("argument2: %s", OptionValues.argument2);
 	gears_println("argument3: %i", OptionValues.argument3);
@@ -70,6 +78,8 @@ int Foobar(int argc, char** argv)
 	gears_println("implicit_value: %i", OptionValues.implicit_value);
 	gears_println("float_value: %f", OptionValues.float_value);
 	gears_println("string_value: %s", OptionValues.string_value);
+	gears_println("short_option: %i", OptionValues.short_option);
+	gears_println("long_option: %i", OptionValues.long_option);
 	gears_println("argument1: %s", OptionValues.argument1);
 	gears_println("argument2: %s", OptionValues.argument2);
 	gears_println("argument3: %i", OptionValues.argument3);
