@@ -48,7 +48,7 @@ static Action actions[] = {
 };
 
 void clean_exit();
-static char* program_name;
+char* program_name;
 int main(int argc, char** argv)
 {
 	program_name = argv[0];

@@ -72,7 +72,7 @@ int Foobar(int argc, char** argv)
 	gears_println("argument4: %f", OptionValues.argument4);
 
 	// parse arguments
-	int newargc = parse_options(options, ARRAY_COUNT(options), argc-1, argv+1);
+	int newargc = parse_options(options, ARRAY_COUNT(options), argc, argv);
 
 	gears_println("int_value: %i", OptionValues.int_value);
 	gears_println("implicit_value: %i", OptionValues.implicit_value);
