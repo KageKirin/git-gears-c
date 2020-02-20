@@ -4,6 +4,7 @@
 #include <string.h>
 
 /// printing functions
+#define gears_printf(str, ...) (printf(str, __VA_ARGS__))
 #define gears_println(str, ...) (printf(str "\n", __VA_ARGS__))
 
 #define gears_logln(out, str, ...) (fprintf(out, str "\n", __VA_ARGS__))
