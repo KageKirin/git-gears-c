@@ -141,6 +141,7 @@ core_projects = {
 
 				buildoptions {
 					"-m64",
+					"-fblocks",
 				}
 
 				configuration { "Debug" }
