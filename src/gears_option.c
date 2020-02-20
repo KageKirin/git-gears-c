@@ -32,7 +32,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 			char* arg = &argv[0][2];
 			for (unsigned i = 0; i < options_count; ++i)
 			{
-				if (STRING_EQUALS(options[i].longname, arg))
+				if (options[i].longname && STRING_EQUALS(options[i].longname, arg))
 				{
 					options[i].consume(options[i].value, &argc, &argv);
 					break;
