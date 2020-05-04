@@ -155,3 +155,75 @@ GitUrl gears_parseUrl(const char* url)
 
 	return gurl;
 }
+
+
+
+
+/*
+new Regex(@"^(?<protocol>https?|git|ssh|rsync)\://" + //
+					  @"(?:(?<user>.+)@)*" +				  //
+					  @"(?<hostname>[a-z0-9_.-]*)" +		  //
+					  @"[:/]*" +							  //
+					  @"(?<port>[\d]+){0,1}" +				  //
+					  @"(?<path>\/((?<owner>[\w\-]+)\/)?" +	  //
+					  @"((?<reponame>[\w\-\.]+?)(\.git|\/)?)?)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"(git\+)?" +						   //
+					  @"((?<protocol>\w+)://)" +	   //
+					  @"((?<user>\w+)@)?" +			   //
+					  @"((?<hostname>[\w\.\-]+))" +	   //
+					  @"(:(?<port>\d+))?" +			   //
+					  @"(?<path>(\/(?<owner>\w+)/)?" + //
+					  @"(\/?(?<reponame>[\w\-]+)(\.git|\/)?)?)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(?:(?<user>.+)@)*" +				 //
+					  @"(?<hostname>[a-z0-9_.-]*)[:]*" + //
+					  @"(?<port>[\d]+){0,1}" +			 //
+					  @"(?<path>\/?(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"((?<user>\w+)@)?" +				 //
+					  @"((?<hostname>[\w\.\-]+))" +	 //
+					  @"[\:\/]{1,2}" +				 //
+					  @"(?<path>((?<owner>\w+)/)?" + //
+					  @"((?<reponame>[\w\-]+)(\.git|\/)?)?)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+		// service specific patterns adapted from giturlparse
+		// base
+		new Regex(@"(?<user>.+)s@(?<hostname>.+)s:(?<reponame>.+)s.git",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"(http://(?<hostname>.+)s/(?<reponame>.+)s.git)", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"(http://(?<hostname>.+)s/(?<reponame>.+)s.git)", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git://(?<hostname>.+)s/(?<reponame>.+)s.git)$", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+		// assembla
+		new Regex(@"^(git@(?<hostname>.+):(?<reponame>.+).git)$", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git://(?<hostname>.+)/(?<reponame>.+).git)$", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+		// bitbucket
+		new Regex(@"^(https://(?<user>.+)@(?<hostname>.+)/(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git@(?<hostname>.+):(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+		// friendcode
+		new Regex(@"^(https://(?<hostname>.+)/(?<owner>.+)@user/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+		// github
+		new Regex(@"^(https://(?<hostname>.+)/(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git@(?<hostname>.+):(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git://(?<hostname>.+)/(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+		// gitlab
+		new Regex(@"^(https://(?<hostname>.+)/(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git@(?<hostname>.+):(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+		new Regex(@"^(git://(?<hostname>.+)/(?<owner>.+)/(?<reponame>.+).git)$",
+				  RegexOptions.Compiled | RegexOptions.IgnoreCase),
+	};
+*/

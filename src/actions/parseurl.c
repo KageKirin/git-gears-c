@@ -179,3 +179,94 @@ int ParseUrl(int argc, char** argv)
 	gears_tag();
 	return 0;
 }
+
+
+/*
+
+"^(https?|git|ssh|ftps?|rsync)://(?:(.+)@)*([a-z0-9_.-]*)[:/]*([\d]+){0,1}(/(([\w\-]+)/)?(([\w\-\.]+?)(\.git|/)?)?)$"
+
+"^(https?|git|ssh|ftps?|rsync)://" \
+"(?:(.+)@)*" \
+"([a-z0-9_.-]*)" \
+"[:/]*" \
+"([\d]+){0,1}" \
+"(/(([\w\-]+)/)?" \
+"(([\w\-\.]+?)(\.git|/)?)?)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"(git\+)?" \
+"((\w+)://)" \
+"((\w+)@)?" \
+"(([\w\.\-]+))" \
+"(:(\d+))?" \
+"((/(\w+)/)?" \
+"(/?([\w\-]+)(\.git|/)?)?)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(?:(.+)@)*" \
+"([a-z0-9_.-]*)[:]*" \
+"([\d]+){0,1}" \
+"(/?(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"((\w+)@)?" \
+"(([\w\.\-]+))" \
+"[\:/]{1,2}" \
+"(((\w+)/)?" \
+"(([\w\-]+)(\.git|/)?)?)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+// service specific patterns adapted from giturlparse
+// base
+
+"(.+)s@(.+)s:(.+)s.git",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"(http://(.+)s/(.+)s.git)", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"(http://(.+)s/(.+)s.git)", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git://(.+)s/(.+)s.git)$", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+// assembla
+
+"^(git@(.+):(.+).git)$", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git://(.+)/(.+).git)$", RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+// bitbucket
+
+"^(https://(.+)@(.+)/(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git@(.+):(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+// friendcode
+
+"^(https://(.+)/(.+)@user/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+// github
+
+"^(https://(.+)/(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git@(.+):(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git://(.+)/(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+// gitlab
+
+"^(https://(.+)/(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git@(.+):(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+"^(git://(.+)/(.+)/(.+).git)$",
+RegexOptions.Compiled | RegexOptions.IgnoreCase),
+
+*/
