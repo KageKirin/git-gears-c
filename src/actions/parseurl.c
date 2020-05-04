@@ -2,13 +2,13 @@
 #include <curl/curl.h>
 #include <fcntl.h>
 #include <git2.h>
-#include <unistd.h>
 #include <rure.h>
+#include <unistd.h>
 
 
-#include "gears_util.h"
 #include "gears_giturl.h"
 #include "gears_option.h"
+#include "gears_util.h"
 
 static char scrape[4096] = {0};
 

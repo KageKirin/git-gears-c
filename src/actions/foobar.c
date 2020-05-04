@@ -5,8 +5,8 @@
 #include <unistd.h>
 
 
-#include "gears_util.h"
 #include "gears_option.h"
+#include "gears_util.h"
 
 static char scrape[4096] = {0};
 
@@ -18,7 +18,8 @@ extern char git_buf__initbuf[];
 
 char git_buf__initbuf[1];
 
-static struct {
+static struct
+{
 	int int_value;
 	int implicit_value;
 	float float_value;
@@ -43,16 +44,16 @@ static struct {
 };
 
 static Option options[] = {
-	{ 'e', "explicit", "explicitly set int value", &OptionValues.int_value, gears_setOptionExplicitInt },
-	{ 'i', "implicit", "implicitly set int value", &OptionValues.implicit_value, gears_setOptionImplicit },
-	{ 'f', "float", "explicitely set float value", &OptionValues.float_value, gears_setOptionExplicitFloat },
-	{ 's', "string", "explicitely set string value", &OptionValues.string_value, gears_setOptionExplicitString },
-	{ 'x', 0, "short option only int", &OptionValues.short_option, gears_setOptionExplicitInt },
-	{ 0, "longopt", "long option only int", &OptionValues.long_option, gears_setOptionExplicitInt },
-	{ .description = "argument value 1 (string)", &OptionValues.argument1, gears_setOptionPositionalString },
-	{ .description = "argument value 2 (string)", &OptionValues.argument2, gears_setOptionPositionalString },
-	{ .description = "argument value 3 (int)", &OptionValues.argument3, gears_setOptionPositionalInt },
-	{ .description = "argument value 4 (float)", &OptionValues.argument4, gears_setOptionPositionalFloat },
+	{'e', "explicit", "explicitly set int value", &OptionValues.int_value, gears_setOptionExplicitInt},
+	{'i', "implicit", "implicitly set int value", &OptionValues.implicit_value, gears_setOptionImplicit},
+	{'f', "float", "explicitely set float value", &OptionValues.float_value, gears_setOptionExplicitFloat},
+	{'s', "string", "explicitely set string value", &OptionValues.string_value, gears_setOptionExplicitString},
+	{'x', 0, "short option only int", &OptionValues.short_option, gears_setOptionExplicitInt},
+	{0, "longopt", "long option only int", &OptionValues.long_option, gears_setOptionExplicitInt},
+	{.description = "argument value 1 (string)", &OptionValues.argument1, gears_setOptionPositionalString},
+	{.description = "argument value 2 (string)", &OptionValues.argument2, gears_setOptionPositionalString},
+	{.description = "argument value 3 (int)", &OptionValues.argument3, gears_setOptionPositionalInt},
+	{.description = "argument value 4 (float)", &OptionValues.argument4, gears_setOptionPositionalFloat},
 };
 
 
