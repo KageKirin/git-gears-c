@@ -23,8 +23,8 @@ GitRemote gears_lookupRemote(const char* remotename)
 		int err = git_remote_lookup(&remote, repo, remotename);
 		if (err == 0)
 		{
-			strncpy(gr.name, git_remote_name(remote), GEARS_GITREMOTE_MAX_LENGTH);
-			strncpy(gr.url, git_remote_url(remote), GEARS_GITREMOTE_MAX_LENGTH);
+			snprintf(gr.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_name(remote));
+			snprintf(gr.url, GEARS_GITREMOTE_MAX_LENGTH,  "%s", git_remote_url(remote));
 			git_remote_free(remote);
 		}
 		git_repository_free(repo);
