@@ -22,6 +22,8 @@ int ListProjects(int argc, char** argv);
 int ListPullRequests(int argc, char** argv);
 int Foobar(int argc, char** argv);
 int ParseUrl(int argc, char** argv);
+int LookupRemote(int argc, char** argv);
+int ParseRemote(int argc, char** argv);
 
 static Action actions[] = {
 	// clang-format off
@@ -32,6 +34,8 @@ static Action actions[] = {
 	// test
 	{ "foobar",             "foos the bar",                                        &Foobar },
 	{ "parse-url",          "parse the given url",                                 &ParseUrl },
+	{ "lookup-remote",      "look up the given remote",                            &LookupRemote },
+	{ "parse-remote",       "look up the given remote and parse its url",          &ParseRemote },
 
 	// gears actions
 	{ "create-gist",        "creates a new gist",                                  &CreateGist },
