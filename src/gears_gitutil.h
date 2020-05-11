@@ -12,4 +12,12 @@ typedef struct GitRemote
 
 GitRemote gears_lookupRemote(const char* remote);
 
+typedef struct GitConfigEntry
+{
+	char name[GEARS_GITREMOTE_MAX_LENGTH];
+	char value[GEARS_GITREMOTE_MAX_LENGTH];
+} GitConfigEntry;
+
+GitConfigEntry gears_getConfigEntry(const char* name);
+
 #endif // GEARS_GITUTIL_H_INC
