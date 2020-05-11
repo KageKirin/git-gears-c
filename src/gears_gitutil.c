@@ -1,4 +1,5 @@
 #include "gears_gitutil.h"
+#include "gears_giturl.h"
 #include "gears_util.h"
 
 #include <assert.h>
@@ -32,19 +33,19 @@ GitRemote gears_lookupRemote(const char* remotename)
 	return gr;
 }
 
+
 GitConfigEntry gears_getConfigEntry(const char* name)
 {
 	assert(name);
-	char scrape[4096] = {0};
+	char scrape[4096] = {};
+	GitConfigEntry gce = {};
 
-	GitConfigEntry gce = {0};
-
-
-	git_config* config = NULL;
 	git_repository* repo = NULL;
-	if (git_repository_open_ext(&repo, getcwd(scrape, sizeof(scrape)), GIT_REPOSITORY_OPEN_CROSS_FS, NULL) == 0)
+	int err = git_repository_open_ext(&repo, getcwd(scrape, sizeof(scrape)), GIT_REPOSITORY_OPEN_CROSS_FS, NULL);
+	if (err == 0)
 	{
-		int err = git_repository_config(&config, repo);
+		git_config* config = NULL;
+		err = git_repository_config(&config, repo);
 		if (err == 0)
 		{
 			git_config_entry* entry;
@@ -61,7 +62,8 @@ GitConfigEntry gears_getConfigEntry(const char* name)
 	}
 	else
 	{
-		int err = git_config_open_default(&config);
+		git_config* config = NULL;
+		err = git_config_open_default(&config);
 		if (err == 0)
 		{
 			git_config_entry* entry;
@@ -77,4 +79,32 @@ GitConfigEntry gears_getConfigEntry(const char* name)
 	}
 
 	return gce;
+}
+
+
+GitConfigEntry gears_getGearsConfigEntry(const char* hostname, const char* subname)
+{
+	assert(hostname);
+	assert(subname);
+
+	char buffer[GEARS_GITREMOTE_MAX_LENGTH] = {};
+	snprintf(buffer, GEARS_GITREMOTE_MAX_LENGTH, "gears.%s.%s", hostname, subname);
+	return gears_getConfigEntry(buffer);
+}
+
+
+GitConfigEntry gears_getGearsConfigEntryRemoteOrURL(const char* remoteOrUrl, const char* subname)
+{
+	assert(remoteOrUrl);
+	assert(subname);
+
+	GitRemote gr = gears_lookupRemote(remoteOrUrl);
+	if (gr.url[0])
+	{
+		remoteOrUrl = gr.url;
+	}
+
+	GitUrl gurl = gears_parseUrl(remoteOrUrl);
+
+	return gears_getGearsConfigEntry(gurl.host, subname);
 }
