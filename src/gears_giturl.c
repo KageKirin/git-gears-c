@@ -158,7 +158,7 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 
 	size_t url_length = strlen(url);
 	bool match = rure_iter_next_captures(iter, (const uint8_t*)url, url_length, caps);
-	gears_dbgln("\"%s\" match: %s", pattern, match ? "true":"false");
+	gears_dbgln("\"%s\" match: %s", pattern, match ? "true" : "false");
 	if (match)
 	{
 		gears_dbgln("captured: %zu groups", rure_captures_len(caps));

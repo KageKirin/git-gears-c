@@ -21,6 +21,7 @@ int ListIssues(int argc, char** argv);
 int ListProjects(int argc, char** argv);
 int ListPullRequests(int argc, char** argv);
 int Foobar(int argc, char** argv);
+int TestOptions(int argc, char** argv);
 int ParseUrl(int argc, char** argv);
 int LookupRemote(int argc, char** argv);
 int ParseRemote(int argc, char** argv);
@@ -33,6 +34,7 @@ static Action actions[] = {
 
 	// test
 	{ "foobar",             "foos the bar",                                        &Foobar },
+	{ "test-options",       "test command line options",                           &TestOptions },
 	{ "parse-url",          "parse the given url",                                 &ParseUrl },
 	{ "lookup-remote",      "look up the given remote",                            &LookupRemote },
 	{ "parse-remote",       "look up the given remote and parse its url",          &ParseRemote },
