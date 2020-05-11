@@ -21,6 +21,7 @@ int ListIssues(int argc, char** argv);
 int ListProjects(int argc, char** argv);
 int ListPullRequests(int argc, char** argv);
 int Foobar(int argc, char** argv);
+int ParseUrl(int argc, char** argv);
 
 static Action actions[] = {
 	// clang-format off
@@ -30,6 +31,7 @@ static Action actions[] = {
 
 	// test
 	{ "foobar",             "foos the bar",                                        &Foobar },
+	{ "parse-url",          "parse the given url",                                 &ParseUrl },
 
 	// gears actions
 	{ "create-gist",        "creates a new gist",                                  &CreateGist },

@@ -11,7 +11,13 @@
 #define gears_wrnln(str, ...) (gears_logln(stderr, gearsio_yellow str gearsio_reset, __VA_ARGS__))
 #define gears_errln(str, ...) (gears_logln(stderr, gearsio_red str gearsio_reset, __VA_ARGS__))
 
+#ifdef _DEBUG
 #define gears_tag() (gears_logln(stdout, gearsio_magenta "%s:%d" gearsio_reset, __FILE__, __LINE__))
+#define gears_dbgln(str, ...) (gears_logln(stdout, gearsio_cyan str gearsio_reset, __VA_ARGS__))
+#else
+#define gears_tag()
+#define gears_dbgln(str, ...)
+#endif
 
 #define gearsio_reset "\x1b[0m"
 #define gearsio_black "\x1b[30m"

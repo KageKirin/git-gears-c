@@ -76,8 +76,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 		size_t len = strlen(argv[0]);
 
 		// special case for -h/--help
-		if ((len == 2 && argv[0][0] == '-' && argv[0][1] == 'h') ||
-			(len == 6 && STRING_EQUALS("--help", &argv[0][0])))
+		if ((len == 2 && argv[0][0] == '-' && argv[0][1] == 'h') || (len == 6 && STRING_EQUALS("--help", &argv[0][0])))
 		{
 			gears_tag();
 			showHelp(options, options_count);

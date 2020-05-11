@@ -98,6 +98,10 @@ local external_scaffolds = {
 	--keep
 	--this
 	--line
+	['rure'] = dofile(path.join(rootpath, "libs", "rure.lua")),
+	--keep
+	--this
+	--line
 }
 
 create_packages_projects(external_scaffolds)
