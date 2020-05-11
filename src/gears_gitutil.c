@@ -1,11 +1,10 @@
 #include "gears_gitutil.h"
 #include "gears_util.h"
 
+#include <assert.h>
 #include <fcntl.h>
 #include <git2.h>
 #include <unistd.h>
-#include <assert.h>
-
 
 
 GitRemote gears_lookupRemote(const char* remotename)
@@ -24,7 +23,7 @@ GitRemote gears_lookupRemote(const char* remotename)
 		if (err == 0)
 		{
 			snprintf(gr.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_name(remote));
-			snprintf(gr.url, GEARS_GITREMOTE_MAX_LENGTH,  "%s", git_remote_url(remote));
+			snprintf(gr.url, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_url(remote));
 			git_remote_free(remote);
 		}
 		git_repository_free(repo);

@@ -5,9 +5,9 @@
 #include <unistd.h>
 
 
+#include "gears_gitutil.h"
 #include "gears_option.h"
 #include "gears_util.h"
-#include "gears_gitutil.h"
 
 static char scrape[4096] = {0};
 

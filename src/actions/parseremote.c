@@ -34,7 +34,7 @@ int ParseRemote(int argc, char** argv)
 	gears_println("name: %s", gr.name);
 	gears_println("url: %s", gr.url);
 
-	if(gr.url[0])
+	if (gr.url[0])
 	{
 		GitUrl gurl = gears_parseUrl(gr.url);
 
