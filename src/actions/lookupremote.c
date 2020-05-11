@@ -1,30 +1,19 @@
+#include "gears_gitutil.h"
+#include "gears_option.h"
+#include "gears_util.h"
+
 #include <assert.h>
 #include <curl/curl.h>
 #include <fcntl.h>
 #include <git2.h>
-#include <rure.h>
 #include <unistd.h>
 
-
-#include "gears_giturl.h"
-#include "gears_option.h"
-#include "gears_util.h"
-
-static char scrape[4096] = {0};
-
-#define GIT_BUF_INIT                                                                                                   \
-	{                                                                                                                  \
-		git_buf__initbuf, 0, 0                                                                                         \
-	}
-extern char git_buf__initbuf[];
-
-char git_buf__initbuf[1];
 
 static struct
 {
 	char* remote;
 } OptionValues = {
-	.remote = NULL,
+	.remote = "origin",
 };
 
 static Option options[] = {
@@ -38,6 +27,11 @@ int LookupRemote(int argc, char** argv)
 	gears_println("remote: %s", OptionValues.remote);
 
 	// implementation of action
+	GitRemote gr = gears_lookupRemote(OptionValues.remote);
+
+	// result display
+	gears_println("name: %s", gr.name);
+	gears_println("url: %s", gr.url);
 
 	gears_tag();
 	return 0;
