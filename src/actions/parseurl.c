@@ -1,24 +1,13 @@
-#include <assert.h>
-#include <curl/curl.h>
-#include <fcntl.h>
-#include <git2.h>
-#include <rure.h>
-#include <unistd.h>
-
-
 #include "gears_giturl.h"
 #include "gears_option.h"
 #include "gears_util.h"
 
-static char scrape[4096] = {0};
+#include <assert.h>
+#include <curl/curl.h>
+#include <fcntl.h>
+#include <git2.h>
+#include <unistd.h>
 
-#define GIT_BUF_INIT                                                                                                   \
-	{                                                                                                                  \
-		git_buf__initbuf, 0, 0                                                                                         \
-	}
-extern char git_buf__initbuf[];
-
-char git_buf__initbuf[1];
 
 static struct
 {
@@ -30,8 +19,6 @@ static struct
 static Option options[] = {
 	{.description = "url to parse", &OptionValues.url, gears_setOptionPositionalString},
 };
-
-int parsetest(char*);
 
 int ParseUrl(int argc, char** argv)
 {
