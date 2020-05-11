@@ -7,6 +7,7 @@
 
 #include "gears_option.h"
 #include "gears_util.h"
+#include "gears_gitutil.h"
 
 static char scrape[4096] = {0};
 
@@ -43,48 +44,16 @@ int Foobar(int argc, char** argv)
 	// result display
 
 	// config
-
-	git_config* config = NULL;
-
-	git_repository* repo = NULL;
-	if (git_repository_open_ext(&repo, getcwd(scrape, sizeof(scrape)), GIT_REPOSITORY_OPEN_CROSS_FS, NULL) == 0)
-	{
-		int err = git_repository_config(&config, repo);
-		assert(err == 0);
-		git_repository_free(repo);
-	}
-	else
-	{
-		int err = git_config_open_default(&config);
-		assert(err == 0);
-	}
-
-
-	if (config)
-	{
-		git_buf strval = GIT_BUF_INIT;
-		if (git_config_get_string_buf(&strval, config, "user.name") == 0)
-		{
-			gears_println("'user.name': %s", strval.ptr);
-		}
-		if (git_config_get_string_buf(&strval, config, "user.email") == 0)
-		{
-			gears_println("'user.email': %s", strval.ptr);
-		}
-		if (git_config_get_string_buf(&strval, config, "gears.github.com.token") == 0)
-		{
-			gears_println("'token': %s", strval.ptr);
-		}
-		if (git_config_get_string_buf(&strval, config, "foobar.hoge") == 0)
-		{
-			gears_println("'foobar.hoge': %s", strval.ptr);
-		}
-		git_config_free(config);
-	}
-	else
-	{
-		gears_errln("no config", NULL);
-	}
+	GitConfigEntry user_name = gears_getConfigEntry("user.name");
+	gears_println("'user.name': %s", user_name.value);
+	GitConfigEntry user_email = gears_getConfigEntry("user.email");
+	gears_println("'user.email': %s", user_email.value);
+	GitConfigEntry token = gears_getConfigEntry("gears.github.com.token");
+	gears_println("'token': %s", token.value);
+	GitConfigEntry foobar_hoge = gears_getConfigEntry("foobar.hoge");
+	gears_println("'foobar.hoge': %s", foobar_hoge.value);
+	GitConfigEntry foobar_fuba = gears_getConfigEntry("foobar.fuba");
+	gears_println("'foobar.fuba': %s", foobar_fuba.value);
 
 	return 0;
 }
