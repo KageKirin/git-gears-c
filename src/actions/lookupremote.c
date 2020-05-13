@@ -13,7 +13,7 @@ static struct
 {
 	char* remote;
 } OptionValues = {
-	.remote = "origin",
+	.remote = NULL,
 };
 
 static Option options[] = {
