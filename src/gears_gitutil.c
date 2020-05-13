@@ -10,7 +10,6 @@
 
 GitRemote gears_lookupRemote(const char* remotename)
 {
-	assert(remotename);
 	char scrape[4096] = {0};
 
 	GitRemote gr = {0};
@@ -20,6 +19,35 @@ GitRemote gears_lookupRemote(const char* remotename)
 
 	if (git_repository_open_ext(&repo, getcwd(scrape, sizeof(scrape)), GIT_REPOSITORY_OPEN_CROSS_FS, NULL) == 0)
 	{
+		if (!remotename)
+		{
+			git_reference* ref;
+			int err = git_repository_head(&ref, repo);
+			if (err == 0)
+			{
+				const char* branchname;
+				err = git_branch_name(&branchname, ref);
+				gears_println("branch %s [%s]", branchname, git_reference_name(ref));
+
+				git_reference* upref;
+				err = git_branch_upstream(&upref, ref);
+				if (err == 0)
+				{
+					err = git_branch_name(&branchname, upref);
+					gears_println("upstream branch %s [%s]", branchname, git_reference_name(upref));
+
+					git_buf buf = {0};
+					git_branch_remote_name(&buf, repo, git_reference_name(upref));
+					gears_println("remote: %s", buf.ptr);
+					snprintf(&scrape[0], sizeof(scrape), "%s", buf.ptr);
+					remotename = &scrape[0];
+				}
+				git_reference_free(upref);
+			}
+			git_reference_free(ref);
+		}
+
+		assert(remotename);
 		int err = git_remote_lookup(&remote, repo, remotename);
 		if (err == 0)
 		{
