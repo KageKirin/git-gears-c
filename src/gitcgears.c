@@ -88,14 +88,14 @@ void clean_exit()
 
 int Help(int argc, char** argv)
 {
-	static char* argv_help[] = {"--help"};
+	static char argv_help[] = {"--help"};
 	if (argc > 1)
 	{
 		for (size_t i = 1; i < ARRAY_COUNT(actions); ++i) // skip help
 		{
 			if (STRING_EQUALS(actions[i].verb, argv[1]))
 			{
-				return actions[i].call(1, argv_help);
+				return actions[i].call(2, (char*[]){argv[1], argv_help});
 			}
 		}
 		gears_println("No such action '%s'", argv[1]);

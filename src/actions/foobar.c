@@ -37,7 +37,10 @@ int Foobar(int argc, char** argv)
 	gears_println("foobar doing stuff", NULL);
 
 	// parse arguments
-	int newargc = parse_options(options, ARRAY_COUNT(options), argc, argv);
+	if (parse_options(options, ARRAY_COUNT(options), argc, argv))
+	{
+		return 1;
+	}
 
 	gears_println("int_value: %i", OptionValues.int_value);
 

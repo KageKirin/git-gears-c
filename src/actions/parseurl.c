@@ -23,7 +23,10 @@ static Option options[] = {
 int ParseUrl(int argc, char** argv)
 {
 	// parse arguments
-	int newargc = parse_options(options, ARRAY_COUNT(options), argc, argv);
+	if (parse_options(options, ARRAY_COUNT(options), argc, argv))
+	{
+		return 1;
+	}
 	gears_println("url: %s", OptionValues.url);
 
 	// implementation of action

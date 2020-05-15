@@ -62,7 +62,10 @@ int TestOptions(int argc, char** argv)
 	gears_println("argument4: %f", OptionValues.argument4);
 
 	// parse arguments
-	int newargc = parse_options(options, ARRAY_COUNT(options), argc, argv);
+	if (parse_options(options, ARRAY_COUNT(options), argc, argv))
+	{
+		return 1;
+	}
 
 	// result display
 	gears_println("int_value: %i", OptionValues.int_value);
