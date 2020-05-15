@@ -8,6 +8,7 @@
 #include "gears_gitutil.h"
 #include "gears_option.h"
 #include "gears_util.h"
+#include "gears_constants.h"
 
 static char scrape[4096] = {0};
 
@@ -54,6 +55,19 @@ int Foobar(int argc, char** argv)
 	gears_println("'foobar.hoge': %s", foobar_hoge.value);
 	GitConfigEntry foobar_fuba = gears_getConfigEntry("foobar.fuba");
 	gears_println("'foobar.fuba': %s", foobar_fuba.value);
+
+	GitConfigEntry hostname_token = gears_getGearsConfigEntry("github.com", kConfigAPIToken);
+	gears_println("'hostname_token': %s", hostname_token.value);
+	GitConfigEntry url_token =
+		gears_getGearsConfigEntryRemoteOrURL("https://github.com/KageKirin/git-gears-c.git", kConfigAPIToken);
+	gears_println("'url_token': %s", url_token.value);
+	GitConfigEntry origin_token = gears_getGearsConfigEntryRemoteOrURL("origin", kConfigAPIToken);
+	gears_println("'origin_token': %s", origin_token.value);
+
+	GitBranch curBranch = gears_getCurrentBranch();
+	gears_println("current branch: %s [%s]", curBranch.name, curBranch.ref);
+	GitBranch curUpBranch = gears_getCurrentUpstreamBranch();
+	gears_println("current upstream branch: %s [%s]", curUpBranch.name, curUpBranch.ref);
 
 	return 0;
 }

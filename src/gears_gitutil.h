@@ -4,6 +4,15 @@
 // define a max length
 #define GEARS_GITREMOTE_MAX_LENGTH 256
 
+typedef struct GitBranch
+{
+	char name[GEARS_GITREMOTE_MAX_LENGTH];
+	char ref[GEARS_GITREMOTE_MAX_LENGTH];
+} GitBranch;
+
+GitBranch gears_getCurrentBranch();
+GitBranch gears_getCurrentUpstreamBranch();
+
 typedef struct GitRemote
 {
 	char name[GEARS_GITREMOTE_MAX_LENGTH];
@@ -19,5 +28,7 @@ typedef struct GitConfigEntry
 } GitConfigEntry;
 
 GitConfigEntry gears_getConfigEntry(const char* name);
+GitConfigEntry gears_getGearsConfigEntry(const char* hostname, const char* subname);
+GitConfigEntry gears_getGearsConfigEntryRemoteOrURL(const char* remoteOrUrl, const char* subname);
 
 #endif // GEARS_GITUTIL_H_INC
