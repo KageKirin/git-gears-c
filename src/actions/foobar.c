@@ -64,6 +64,11 @@ int Foobar(int argc, char** argv)
 	GitConfigEntry origin_token = gears_getGearsConfigEntryRemoteOrURL("origin", kConfigAPIToken);
 	gears_println("'origin_token': %s", origin_token.value);
 
+	GitBranch curBranch = gears_getCurrentBranch();
+	gears_println("current branch: %s [%s]", curBranch.name, curBranch.ref);
+	GitBranch curUpBranch = gears_getCurrentUpstreamBranch();
+	gears_println("current upstream branch: %s [%s]", curUpBranch.name, curUpBranch.ref);
+
 	return 0;
 }
 
