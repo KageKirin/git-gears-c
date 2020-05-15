@@ -8,6 +8,61 @@
 #include <unistd.h>
 
 
+GitBranch gears_getCurrentBranch()
+{
+	char scrape[4096] = {};
+	GitBranch gb = {};
+
+	git_repository* repo = NULL;
+
+	int err = git_repository_open_ext(&repo, getcwd(scrape, sizeof(scrape)), GIT_REPOSITORY_OPEN_CROSS_FS, NULL);
+	if (err == 0)
+	{
+		git_reference* ref;
+		err = git_repository_head(&ref, repo);
+		if (err == 0)
+		{
+			snprintf(gb.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_shorthand(ref));
+			snprintf(gb.ref,  GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_name(ref));
+			git_reference_free(ref);
+		}
+		git_repository_free(repo);
+	}
+
+	return gb;
+}
+
+
+GitBranch gears_getCurrentUpstreamBranch()
+{
+	char scrape[4096] = {};
+	GitBranch gb = {};
+
+	git_repository* repo = NULL;
+	int err = git_repository_open_ext(&repo, getcwd(scrape, sizeof(scrape)), GIT_REPOSITORY_OPEN_CROSS_FS, NULL);
+	if (err == 0)
+	{
+		git_reference* ref;
+		err = git_repository_head(&ref, repo);
+		if (err == 0)
+		{
+			git_reference* upref;
+			err = git_branch_upstream(&upref, ref);
+			if (err == 0)
+			{
+				snprintf(gb.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_shorthand(upref));
+				snprintf(gb.ref,  GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_name(upref));
+				git_reference_free(upref);
+			}
+			git_reference_free(ref);
+		}
+		git_repository_free(repo);
+	}
+
+	return gb;
+}
+
+
 GitRemote gears_lookupRemote(const char* remotename)
 {
 	char scrape[4096] = {};
