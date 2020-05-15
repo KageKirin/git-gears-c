@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <fcntl.h>
 #include <git2.h>
+#include <stb_printf.h>
 #include <unistd.h>
 
 
@@ -22,8 +23,8 @@ GitBranch gears_getCurrentBranch()
 		err = git_repository_head(&ref, repo);
 		if (err == 0)
 		{
-			snprintf(gb.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_shorthand(ref));
-			snprintf(gb.ref,  GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_name(ref));
+			stbsp_snprintf(gb.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_shorthand(ref));
+			stbsp_snprintf(gb.ref, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_name(ref));
 			git_reference_free(ref);
 		}
 		git_repository_free(repo);
@@ -50,8 +51,8 @@ GitBranch gears_getCurrentUpstreamBranch()
 			err = git_branch_upstream(&upref, ref);
 			if (err == 0)
 			{
-				snprintf(gb.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_shorthand(upref));
-				snprintf(gb.ref,  GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_name(upref));
+				stbsp_snprintf(gb.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_shorthand(upref));
+				stbsp_snprintf(gb.ref, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_reference_name(upref));
 				git_reference_free(upref);
 			}
 			git_reference_free(ref);
@@ -83,7 +84,7 @@ GitRemote gears_lookupRemote(const char* remotename)
 				if (err == 0)
 				{
 					gears_println("upstream remote: %s", buf.ptr);
-					snprintf(&scrape[0], sizeof(scrape), "%s", buf.ptr);
+					stbsp_snprintf(&scrape[0], sizeof(scrape), "%s", buf.ptr);
 					remotename = &scrape[0];
 					git_buf_dispose(&buf);
 				}
@@ -91,14 +92,14 @@ GitRemote gears_lookupRemote(const char* remotename)
 			}
 		}
 
-		if (!remotename)
+		if (remotename)
 		{
 			git_remote* remote = NULL;
 			err = git_remote_lookup(&remote, repo, remotename);
 			if (err == 0)
 			{
-				snprintf(gr.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_name(remote));
-				snprintf(gr.url, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_url(remote));
+				stbsp_snprintf(gr.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_name(remote));
+				stbsp_snprintf(gr.url, GEARS_GITREMOTE_MAX_LENGTH, "%s", git_remote_url(remote));
 				git_remote_free(remote);
 			}
 		}
@@ -127,8 +128,8 @@ GitConfigEntry gears_getConfigEntry(const char* name)
 			err = git_config_get_entry(&entry, config, name);
 			if (err == 0)
 			{
-				snprintf(gce.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->name);
-				snprintf(gce.value, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->value);
+				stbsp_snprintf(gce.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->name);
+				stbsp_snprintf(gce.value, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->value);
 				git_config_entry_free(entry);
 			}
 			git_config_free(config);
@@ -145,8 +146,8 @@ GitConfigEntry gears_getConfigEntry(const char* name)
 			err = git_config_get_entry(&entry, config, name);
 			if (err == 0)
 			{
-				snprintf(gce.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->name);
-				snprintf(gce.value, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->value);
+				stbsp_snprintf(gce.name, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->name);
+				stbsp_snprintf(gce.value, GEARS_GITREMOTE_MAX_LENGTH, "%s", entry->value);
 				git_config_entry_free(entry);
 			}
 			git_config_free(config);
@@ -163,7 +164,7 @@ GitConfigEntry gears_getGearsConfigEntry(const char* hostname, const char* subna
 	assert(subname);
 
 	char buffer[GEARS_GITREMOTE_MAX_LENGTH] = {};
-	snprintf(buffer, GEARS_GITREMOTE_MAX_LENGTH, "gears.%s.%s", hostname, subname);
+	stbsp_snprintf(buffer, GEARS_GITREMOTE_MAX_LENGTH, "gears.%s.%s", hostname, subname);
 	return gears_getConfigEntry(buffer);
 }
 

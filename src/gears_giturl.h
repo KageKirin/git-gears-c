@@ -17,5 +17,6 @@ typedef struct GitUrl
 } GitUrl;
 
 GitUrl gears_parseUrl(const char* url);
+GitUrl gears_parseRemoteOrUrl(const char* remoteOrUrl);
 
 #endif // GEARS_GITURL_H_INC
