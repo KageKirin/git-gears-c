@@ -24,7 +24,10 @@ static Option options[] = {
 int ParseRemote(int argc, char** argv)
 {
 	// parse arguments
-	int newargc = parse_options(options, ARRAY_COUNT(options), argc, argv);
+	if (parse_options(options, ARRAY_COUNT(options), argc, argv))
+	{
+		return 1;
+	}
 	gears_println("remote: %s", OptionValues.remote);
 
 	// implementation of action
