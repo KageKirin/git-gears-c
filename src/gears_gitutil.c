@@ -27,14 +27,22 @@ GitRemote gears_lookupRemote(const char* remotename)
 			{
 				const char* branchname;
 				err = git_branch_name(&branchname, ref);
-				gears_println("branch %s [%s]", branchname, git_reference_name(ref));
+				gears_println("branch %s [%s] {%s}", branchname, git_reference_name(ref), git_reference_shorthand(ref));
+
+				git_buf buf_remote = {};
+				err = git_branch_upstream_remote(&buf_remote, repo, git_reference_name(ref));
+				gears_println("upstream remote: %s", buf_remote.ptr);
+
+				git_buf buf_upstream = {};
+				err = git_branch_upstream_name(&buf_upstream, repo, git_reference_name(ref));
+				gears_println("upstream branch: %s", buf_upstream.ptr);
 
 				git_reference* upref;
 				err = git_branch_upstream(&upref, ref);
 				if (err == 0)
 				{
 					err = git_branch_name(&branchname, upref);
-					gears_println("upstream branch %s [%s]", branchname, git_reference_name(upref));
+					gears_println("upstream branch %s [%s] {%s}", branchname, git_reference_name(upref), git_reference_shorthand(upref));
 
 					git_buf buf = {0};
 					git_branch_remote_name(&buf, repo, git_reference_name(upref));
