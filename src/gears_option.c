@@ -80,6 +80,7 @@ int parse_options(const Option* options, unsigned options_count, int argc, char*
 		{
 			gears_tag();
 			showHelp(options, options_count);
+			return argc;
 
 			argc -= 1;
 			argv += 1;
