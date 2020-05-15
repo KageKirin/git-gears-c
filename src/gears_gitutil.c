@@ -174,13 +174,7 @@ GitConfigEntry gears_getGearsConfigEntryRemoteOrURL(const char* remoteOrUrl, con
 	assert(remoteOrUrl);
 	assert(subname);
 
-	GitRemote gr = gears_lookupRemote(remoteOrUrl);
-	if (gr.url[0])
-	{
-		remoteOrUrl = gr.url;
-	}
-
-	GitUrl gurl = gears_parseUrl(remoteOrUrl);
+	GitUrl gurl = gears_parseRemoteOrUrl(remoteOrUrl);
 
 	return gears_getGearsConfigEntry(gurl.host, subname);
 }
