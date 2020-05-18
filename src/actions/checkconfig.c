@@ -42,22 +42,26 @@ int CheckConfig(int argc, char** argv)
 
 	// TODO: check config entries validity:
 	// type: compare against enum/string
+	// strstr/regex hostname in endpoint url
 	// grql: check if exists (e.g. get API)
 	// rest: check if exists (e.g. get something simple)
 	// token: check if valid by doing simple query
 	if (OptionValues.showDetails)
 	{
 		gears_println("type: %s %s", gce_type.value, strlen(gce_type.value) ? u_check : u_cross);
-		gears_println("endpoint (GraphQL): %s %s", gce_grql.value, strlen(gce_grql.value) ? u_check : u_cross);
-		gears_println("endpoint (REST): %s %s", gce_rest.value, strlen(gce_rest.value) ? u_check : u_cross);
-		gears_println("token: %s %s", gce_token.value, strlen(gce_token.value) ? u_check : u_cross);
+		gears_println("endpoint (GraphQL): %s %s", gce_grql.value,
+					  proto_getRequest(gce_grql.value, NULL) == 0 ? u_check : u_cross);
+		gears_println("endpoint (REST): %s %s", gce_rest.value,
+					  proto_getRequest(gce_rest.value, NULL) == 0 ? u_check : u_cross);
+		gears_println("token: %s %s", gce_token.value,
+					  proto_getRequest(gce_rest.value, gce_token.value) == 0 ? u_check : u_cross);
 	}
 	else
 	{
 		gears_println("type: %s", strlen(gce_type.value) ? u_check : u_cross);
-		gears_println("endpoint (GraphQL): %s", strlen(gce_grql.value) ? u_check : u_cross);
-		gears_println("endpoint (REST): %s", strlen(gce_rest.value) ? u_check : u_cross);
-		gears_println("token: %s", strlen(gce_token.value) ? u_check : u_cross);
+		gears_println("endpoint (GraphQL): %s", proto_getRequest(gce_grql.value, NULL) == 0 ? u_check : u_cross);
+		gears_println("endpoint (REST): %s", proto_getRequest(gce_rest.value, NULL) == 0 ? u_check : u_cross);
+		gears_println("token: %s", proto_getRequest(gce_rest.value, gce_token.value) == 0 ? u_check : u_cross);
 	}
 
 	return 0;
