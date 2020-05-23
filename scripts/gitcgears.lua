@@ -1,5 +1,5 @@
 --
--- PokeAss build configuration script
+-- git-gears-c build configuration script
 --
 -------------------------------------------------------------------------------
 --
@@ -83,6 +83,10 @@ local external_scaffolds = {
 	--this
 	--line
 	['curl'] = dofile(path.join(rootpath, "libs", "curl.lua")),
+	--keep
+	--this
+	--line
+	['incbin'] = dofile(path.join(rootpath, "libs", "incbin.lua")),
 	--keep
 	--this
 	--line
