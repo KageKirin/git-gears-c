@@ -36,7 +36,7 @@ GENIE_OPTIONS?=
 
 PROJECT_TYPE?=ninja
 
-$(GITCGEARS): projgen
+$(GITCGEARS): embed projgen
 	$(SILENT) $(MAKE) -C .build/$(PROJECT_TYPE).$(OS) GENIE_OPTIONS=$(GENIE_OPTIONS)
 
 all: $(GITCGEARS)
@@ -89,5 +89,9 @@ release-freebsd: prepare-release
 prepare-release:
 	$(SILENT) git checkout src/version.h
 	$(GENIE) release
+
+embed:
+	$(GENIE) embed
+
 refresh:
 	$(GENIE) refresh
