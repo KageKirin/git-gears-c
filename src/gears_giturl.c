@@ -1,7 +1,9 @@
 #include "gears_giturl.h"
+#include "gears_gitutil.h"
 #include "gears_util.h"
 
 #include <rure.h>
+#include <stb_printf.h>
 
 #include <assert.h>
 
@@ -118,7 +120,7 @@ GitUrl gears_parseUrl(const char* url)
 	{
 	}
 
-	GitUrl gurl = {0};
+	GitUrl gurl = {};
 
 	for (int i = 0; i < ARRAY_COUNT(gears_giturlpatterns); ++i)
 	{
@@ -182,8 +184,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("protocol: %.*s", (int)(match.end - match.start), url + match.start);
-				snprintf(gurl->protocol, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
-						 url + match.start);
+				stbsp_snprintf(gurl->protocol, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
+							   url + match.start);
 			}
 		}
 
@@ -195,7 +197,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("user: %.*s", (int)(match.end - match.start), url + match.start);
-				// snprintf(gurl->, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start), url + match.start);
+				// stbsp_snprintf(gurl->, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start), url +
+				// match.start);
 			}
 		}
 
@@ -207,8 +210,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("hostname: %.*s", (int)(match.end - match.start), url + match.start);
-				snprintf(gurl->host, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
-						 url + match.start);
+				stbsp_snprintf(gurl->host, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
+							   url + match.start);
 			}
 		}
 
@@ -220,7 +223,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("hostport: %.*s", (int)(match.end - match.start), url + match.start);
-				// snprintf(gurl->, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start), url + match.start);
+				// stbsp_snprintf(gurl->, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start), url +
+				// match.start);
 			}
 		}
 
@@ -232,8 +236,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("hostpath: %.*s", (int)(match.end - match.start), url + match.start);
-				snprintf(gurl->path, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
-						 url + match.start);
+				stbsp_snprintf(gurl->path, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
+							   url + match.start);
 			}
 		}
 
@@ -245,8 +249,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("owner: %.*s", (int)(match.end - match.start), url + match.start);
-				snprintf(gurl->owner, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
-						 url + match.start);
+				stbsp_snprintf(gurl->owner, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
+							   url + match.start);
 			}
 		}
 
@@ -258,8 +262,8 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 			if (match.start < url_length && match.end < url_length)
 			{
 				gears_dbgln("reponame: %.*s", (int)(match.end - match.start), url + match.start);
-				snprintf(gurl->reponame, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
-						 url + match.start);
+				stbsp_snprintf(gurl->reponame, GEARS_GITURL_MAX_LENGTH, "%.*s", (int)(match.end - match.start),
+							   url + match.start);
 			}
 		}
 	}
@@ -270,4 +274,18 @@ bool parseUrl(const char* url, const char* pattern, GitUrl* gurl)
 	rure_free(re);
 
 	return match;
+}
+
+
+GitUrl gears_parseRemoteOrUrl(const char* remoteOrUrl)
+{
+	assert(remoteOrUrl);
+
+	GitRemote gr = gears_lookupRemote(remoteOrUrl);
+	if (gr.url[0])
+	{
+		remoteOrUrl = gr.url;
+	}
+
+	return gears_parseUrl(remoteOrUrl);
 }

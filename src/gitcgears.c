@@ -62,6 +62,8 @@ int main(int argc, char** argv)
 	program_name = argv[0];
 	atexit(clean_exit);
 	git_libgit2_init();
+	curl_global_init(CURL_GLOBAL_DEFAULT);
+
 
 	if (argc > 1)
 	{
@@ -84,6 +86,7 @@ int main(int argc, char** argv)
 void clean_exit()
 {
 	git_libgit2_shutdown();
+	curl_global_cleanup();
 }
 
 int Help(int argc, char** argv)
