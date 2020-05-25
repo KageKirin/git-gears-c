@@ -30,7 +30,7 @@ return {
 	end,
 
 	_create_projects = function()
-		os.execute("curl -o ".. path.join(jsmn_root, "jsmn.h") .. " https://raw.githubusercontent.com/zserge/jsmn/master/jsmn.h")
+		os.execute("curl -L -o ".. path.join(jsmn_root, "jsmn.h") .. " https://raw.githubusercontent.com/zserge/jsmn/master/jsmn.h")
 	end, -- _create_projects()
 }
 
