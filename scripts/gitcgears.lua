@@ -106,6 +106,10 @@ local external_scaffolds = {
 	--keep
 	--this
 	--line
+	['stb'] = dofile(path.join(rootpath, "libs", "stb.lua")),
+	--keep
+	--this
+	--line
 }
 
 create_packages_projects(external_scaffolds)
