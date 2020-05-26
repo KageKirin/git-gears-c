@@ -1,0 +1,6 @@
+{
+	"source_branch": "$_branch:String",
+	"target_branch": "$_targetBranch:String",
+	"title": "$_title:String",
+	"description": "$_body:String"
+}

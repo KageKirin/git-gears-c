@@ -1,0 +1,9 @@
+{
+	"name": "$_repoName:String",
+	"namespace_id": "$_ownerId:ID",
+	"description": "$_description:String\n$_homepage:String",
+	"visibility": "$_visibility:VisibilityLevelsEnum",
+	"lfs_enabled": true,
+	"remove_source_branch_after_merge": true,
+	"autoclose_referenced_issues": true
+}

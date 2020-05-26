@@ -1,0 +1,4 @@
+projects/$_projectId:ID/merge_requests
+?max_results=100
+&order_by=updated_at
+&sort=desc
