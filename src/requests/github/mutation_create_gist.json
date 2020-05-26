@@ -1,0 +1,9 @@
+{
+	"description": "$_title:String -- $_description:String",
+	"public": "$_isPublic:Bool",
+	"files": {
+		"$_filename": {
+			"content": "$_body:String",
+		}
+	}
+}
