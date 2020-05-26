@@ -1,0 +1,21 @@
+
+query($_owner: String!, $_count: Int!)
+{
+	user(login: $_owner)
+	{
+		repositoriesContributedTo(first: $_count)
+		{
+			nodes
+			{
+				id,
+				url,
+				name,
+				description,
+				homepageUrl,
+				nameWithOwner,
+				createdAt,
+				pushedAt,
+			}
+		}
+	}
+}

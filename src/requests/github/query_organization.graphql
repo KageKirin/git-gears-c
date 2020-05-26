@@ -1,0 +1,16 @@
+
+query($_login: String!)
+{
+	organization(login: $_login)
+	{
+		id,
+		name,
+		login,
+		email,
+		url,
+		description
+
+		projectsUrl,
+		websiteUrl,
+	}
+}

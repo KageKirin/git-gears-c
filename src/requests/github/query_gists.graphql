@@ -1,0 +1,23 @@
+
+query($_owner: String!, $_count: Int!)
+{
+	user(login: $_owner)
+	{
+		gists(first: $_count)
+		{
+			nodes
+			{
+				id,
+				name,
+				description,
+				createdAt,
+				pushedAt,
+				files
+				{
+					name,
+					text,
+				}
+			}
+		}
+	}
+}

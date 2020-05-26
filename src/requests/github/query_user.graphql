@@ -1,0 +1,16 @@
+
+query($_login: String!)
+{
+	user(login: $_login)
+	{
+		id,
+		name,
+		login,
+		email,
+		url,
+
+		bio,
+		company,
+		websiteUrl,
+	}
+}

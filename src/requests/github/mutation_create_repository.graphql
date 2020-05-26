@@ -1,0 +1,31 @@
+
+mutation($_mutationId: String!,
+			$_ownerId: ID!,
+			$_name: String!,
+			$_visibility: RepositoryVisibility!,
+			$_description: String,
+			$_homepageUrl: URI)
+{
+	createRepository(input: {
+		clientMutationId: $_mutationId,
+		ownerId: $_ownerId,
+		name: $_name,
+		visibility: $_visibility,
+		description: $_description,
+		homepageUrl: $_homepageUrl,
+	})
+	{
+		clientMutationId,
+		repository
+		{
+			id,
+			url,
+			name,
+			description,
+			homepageUrl,
+			nameWithOwner,
+			createdAt,
+			pushedAt,
+		}
+	}
+}

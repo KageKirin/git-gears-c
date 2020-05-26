@@ -1,0 +1,20 @@
+
+query($_owner: String!, $_name:String!)
+{
+	user(login: $_owner)
+	{
+		gist(name:$_name)
+		{
+			id,
+			name,
+			description,
+			createdAt,
+			pushedAt,
+			files
+			{
+				name,
+				text,
+			}
+		}
+	}
+}

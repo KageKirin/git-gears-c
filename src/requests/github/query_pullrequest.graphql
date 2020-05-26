@@ -1,0 +1,25 @@
+
+query($_owner: String!, $_name: String!, $_branch: String!)
+{
+	repository(owner: $_owner, name: $_name)
+	{
+		id,
+		name,
+		url,
+		pullRequests(headRefName: $_branch, orderBy: {direction : DESC, field : UPDATED_AT}, first : 1)
+		{
+			nodes
+			{
+				baseRefName,
+				headRefName,
+				number,
+				bodyText,
+				permalink,
+				resourcePath,
+				state,
+				title,
+				url,
+			}
+		}
+	}
+}

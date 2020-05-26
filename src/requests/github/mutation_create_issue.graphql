@@ -1,0 +1,21 @@
+
+mutation($_mutationId: String!, $_repositoryId: ID!, $_title: String!, $_body: String!)
+{
+	createIssue(input: {
+		clientMutationId: $_mutationId,
+		title: $_title,
+		body: $_body,
+		repositoryId: $_repositoryId,
+	})
+	{
+		clientMutationId,
+		issue
+		{
+			number,
+			bodyText,
+			state,
+			title,
+			url,
+		}
+	}
+}
