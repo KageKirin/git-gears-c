@@ -30,8 +30,11 @@ return {
 	end,
 
 	_create_projects = function()
+	end,
+
+	_refresh_project = function()
 		os.execute("curl -L -o ".. path.join(incbin_root, "incbin.h") .. " https://raw.githubusercontent.com/graphitemaster/incbin/master/incbin.h")
-	end, -- _create_projects()
+	end,
 }
 
 ---

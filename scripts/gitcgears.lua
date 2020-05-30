@@ -216,6 +216,35 @@ create_packages_projects(core_projects)
 -- Use the release action to prepare source and binary packages for a new release.
 -- This action isn't complete yet; a release still requires some manual work.
 --
+	--dofile("refresh.lua")
+
+	newaction {
+		trigger     = "refresh",
+		description = "Refresh dependencies functions",
+		execute     = function()
+			refresh_packages_projects(external_scaffolds)
+			refresh_packages_projects(core_projects)
+		end --dorefresh
+	}
+
+	-------------------------------------------------------------------------------
+--
+-- Use the release action to prepare source and binary packages for a new release.
+-- This action isn't complete yet; a release still requires some manual work.
+--
+	dofile("embed.lua")
+
+	newaction {
+		trigger     = "embed",
+		description = "Embed query strings",
+		execute     = doembed
+	}
+
+-------------------------------------------------------------------------------
+--
+-- Use the release action to prepare source and binary packages for a new release.
+-- This action isn't complete yet; a release still requires some manual work.
+--
 	dofile("release.lua")
 
 	newaction {

@@ -387,6 +387,18 @@ function create_packages_projects(_packages)
 	end
 end
 
+-- reresh project packages
+function refresh_packages_projects(_packages)
+	if _packages then
+		for k, pkg in pairs(_packages) do
+			if pkg['_refresh_project'] then
+				print('refreshing project package', colorize(ansicolors.cyan, k))
+				pkg._refresh_project()
+			end
+		end
+	end
+end
+
 ---
 
 function filter_non_unitbuild_sources(_sourceGroups, _unitbuildFileTag, _softExclude)

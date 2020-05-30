@@ -30,8 +30,11 @@ return {
 	end,
 
 	_create_projects = function()
+	end,
+
+	_refresh_project = function()
 		os.execute("curl -L -o ".. path.join(jsmn_root, "jsmn.h") .. " https://raw.githubusercontent.com/zserge/jsmn/master/jsmn.h")
-	end, -- _create_projects()
+	end,
 }
 
 ---

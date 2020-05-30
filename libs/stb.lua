@@ -30,8 +30,11 @@ return {
 	end,
 
 	_create_projects = function()
+	end,
+	
+	_refresh_project = function()
 		os.execute("curl -L -o ".. path.join(stb_root, "stb_printf.h") .. " https://github.com/nothings/stb/raw/master/stb_sprintf.h")
-	end, -- _create_projects()
+	end,
 }
 
 ---

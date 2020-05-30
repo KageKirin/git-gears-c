@@ -89,3 +89,5 @@ release-freebsd: prepare-release
 prepare-release:
 	$(SILENT) git checkout src/version.h
 	$(GENIE) release
+refresh:
+	$(GENIE) refresh
