@@ -93,5 +93,8 @@ prepare-release:
 embed:
 	$(GENIE) embed
 
+generate:
+	$(GENIE) generate
+
 refresh:
 	$(GENIE) refresh

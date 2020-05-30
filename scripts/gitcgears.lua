@@ -232,6 +232,19 @@ create_packages_projects(core_projects)
 -- Use the release action to prepare source and binary packages for a new release.
 -- This action isn't complete yet; a release still requires some manual work.
 --
+	dofile("generate.lua")
+
+	newaction {
+		trigger     = "generate",
+		description = "Generate query functions",
+		execute     = dogenerate
+	}
+
+	-------------------------------------------------------------------------------
+--
+-- Use the release action to prepare source and binary packages for a new release.
+-- This action isn't complete yet; a release still requires some manual work.
+--
 	dofile("embed.lua")
 
 	newaction {
