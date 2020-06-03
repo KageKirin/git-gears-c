@@ -72,7 +72,7 @@ int proto_putRequest(const char* url, const char* token)
 }
 
 
-int proto_postRequest(const char* url, const char* token)
+int proto_postRequest(const char* url, const char* token, const char* postData)
 {
 	assert(url);
 
@@ -83,11 +83,11 @@ int proto_postRequest(const char* url, const char* token)
 		curl_easy_setopt(curl, CURLOPT_POST, 1L);
 
 		// on receive
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_passthtrough);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
+	//	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_passthtrough);
+	//	curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
 
 		// on send
-		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, ""); //<--- fill with post data
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postData); //<--- fill with post data
 #ifdef SKIP_PEER_VERIFICATION
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 #endif

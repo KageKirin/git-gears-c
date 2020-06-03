@@ -6,6 +6,6 @@
 // returns HTTP error code as number
 int proto_getRequest(const char* url, const char* token);
 int proto_putRequest(const char* url, const char* token);
-int proto_postRequest(const char* url, const char* token);
+int proto_postRequest(const char* url, const char* token, const char* postData);
 
 #endif // GEARS_REQUEST_H_INC
