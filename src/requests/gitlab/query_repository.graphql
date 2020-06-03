@@ -1,0 +1,14 @@
+
+query($_fullPath: ID!)
+{
+	project(fullPath: $_fullPath)
+	{
+		id,
+		webUrl,
+		name,
+		description,
+		fullPath,
+		createdAt,
+		lastActivityAt,
+	}
+}

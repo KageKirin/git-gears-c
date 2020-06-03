@@ -1,0 +1,27 @@
+
+mutation($_mutationId: String!, $_title: String!, $_body: String!, $_visibility: VisibilityLevelsEnum!, $_description: String, $_filename: String, $_fullPath: ID)
+{
+	createSnippet(input: {
+		clientMutationId: $_mutationId,
+		title: $_title,
+		fileName: $_filename,
+		description: $_description,
+		visibilityLevel: $_visibility,
+		content: $_body,
+		projectPath: $_fullPath,
+	})
+	{
+		clientMutationId,
+		snippet
+		{
+			id,
+			title,
+			description,
+			createdAt,
+			updatedAt,
+			fileName,
+			content,
+			webUrl,
+		}
+	}
+}

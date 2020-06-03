@@ -1,0 +1,24 @@
+
+query ($_fullPath: ID!, $_count: Int!)
+{
+	project(fullPath: $_fullPath)
+	{
+		id,
+		name,
+		webUrl,
+		mergeRequests(first: $_count)
+		{
+			nodes
+			{
+				id,
+				targetBranch,
+				sourceBranch,
+				iid,
+				description,
+				mergeStatus,
+				title,
+				webUrl,
+			}
+		}
+	}
+}

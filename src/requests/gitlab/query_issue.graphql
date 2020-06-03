@@ -1,0 +1,17 @@
+
+query ($_fullPath: ID!, $_iid: String!)
+{
+	project(fullPath: $_fullPath)
+	{
+		id,
+		name,
+		webUrl,
+		issue(iid: $_iid)
+		{
+			iid,
+			title,
+			description,
+			webUrl,
+		}
+	}
+}

@@ -1,0 +1,20 @@
+
+query($_owner: ID!, $_count: Int!)
+{
+	namespace(fullPath: $_owner)
+	{
+		projects(first: $_count)
+		{
+			nodes
+			{
+				id,
+				webUrl,
+				name,
+				description,
+				fullPath,
+				createdAt,
+				lastActivityAt,
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+
+query($_count: Int!)
+{
+	currentUser
+	{
+		snippets(first: $_count)
+		{
+			nodes
+			{
+				id,
+				title,
+				description,
+				createdAt,
+				updatedAt,
+				fileName,
+				content,
+				webUrl,
+			}
+		}
+	}
+}

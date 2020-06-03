@@ -1,0 +1,21 @@
+
+query($_gid: ID!)
+{
+	currentUser
+	{
+		snippets(ids: [$_gid])
+		{
+			nodes
+			{
+				id,
+				title,
+				description,
+				createdAt,
+				updatedAt,
+				fileName,
+				content,
+				webUrl,
+			}
+		}
+	}
+}

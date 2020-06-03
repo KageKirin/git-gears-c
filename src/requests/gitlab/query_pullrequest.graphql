@@ -1,0 +1,24 @@
+
+query ($_fullPath: ID!, $_branch: String!)
+{
+	project(fullPath: $_fullPath)
+	{
+		id,
+		name,
+		webUrl,
+		mergeRequests(filter:{targetBranch: $_branch})
+		{
+			nodes
+			{
+				id,
+				targetBranch,
+				sourceBranch,
+				iid,
+				description,
+				mergeStatus,
+				title,
+				webUrl,
+			}
+		}
+	}
+}
