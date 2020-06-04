@@ -61,16 +61,28 @@ int TestQuery(int argc, char** argv)
 
 		// current user
 		{
+			char recvBuffer[65535] = {};
 			int bufsize = snprintJsonRequest_GithubQueryViewerGraphql(NULL, 0);
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryViewerGraphql(buffer, bufsize+1);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
+
+
+			char* b2 = NULL;
+			gears_println("ha?: %p | %p", b2, &b2);
+
+			res = proto_postRequest2(gce_grql.value, gce_token.value, buffer, &b2);
+			gears_println("query res: %i", res);
+			gears_println("%s", b2);
+			free(b2);
 		}
 
 		// owner (org or user)
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryOwnerGraphql qv = {
 				.login = gurl.owner,
 			};
@@ -78,12 +90,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryOwnerGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// owning user
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryUserGraphql qv = {
 				.login = gurl.owner,
 			};
@@ -91,12 +105,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryUserGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// owning organization
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryOrganizationGraphql qv = {
 				.login = gurl.owner,
 			};
@@ -104,12 +120,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryOrganizationGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// repo info
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryRepositoryGraphql qv = {
 				.owner = gurl.owner,
 				.name  = gurl.reponame,
@@ -118,12 +136,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryRepositoryGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// repo's issues
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryIssuesGraphql qv = {
 				.owner = gurl.owner,
 				.name  = gurl.reponame,
@@ -133,12 +153,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryIssuesGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// repo's PRs
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryPullrequestsGraphql qv = {
 				.owner = gurl.owner,
 				.name  = gurl.reponame,
@@ -148,12 +170,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryPullrequestsGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// my gists
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryGistsGraphql qv = {
 				.owner = gurl.owner,
 				.count = 10,
@@ -162,12 +186,14 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryGistsGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 
 		// my repos
 		{
+			char recvBuffer[65535] = {};
 			GithubQueryRepositoriesGraphql qv = {
 				.owner = gurl.owner,
 				.count = 10,
@@ -176,8 +202,9 @@ int TestQuery(int argc, char** argv)
 			char buffer[bufsize+1];
 			snprintJsonRequest_GithubQueryRepositoriesGraphql(buffer, bufsize+1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer);
+			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
 			gears_println("query res: %i", res);
+			gears_println("%s", recvBuffer);
 		}
 	}
 
