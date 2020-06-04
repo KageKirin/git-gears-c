@@ -1,10 +1,10 @@
-#include "gears_gitutil.h"
-#include "gears_giturl.h"
-#include "gears_option.h"
-#include "gears_util.h"
 #include "gears_config.h"
 #include "gears_constants.h"
+#include "gears_giturl.h"
+#include "gears_gitutil.h"
+#include "gears_option.h"
 #include "gears_request.h"
+#include "gears_util.h"
 
 #include "requests/github_graphql.h"
 #include "requests/github_graphqlutils.h"
@@ -61,150 +61,212 @@ int TestQuery(int argc, char** argv)
 
 		// current user
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			int bufsize = snprintJsonRequest_GithubQueryViewerGraphql(NULL, 0);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryViewerGraphql(buffer, bufsize+1);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryViewerGraphql(buffer, bufsize + 1);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
-
-
-			char* b2 = NULL;
-			gears_println("ha?: %p | %p", b2, &b2);
-
-			res = proto_postRequest2(gce_grql.value, gce_token.value, buffer, &b2);
-			gears_println("query res: %i", res);
-			gears_println("%s", b2);
-			free(b2);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// owner (org or user)
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryOwnerGraphql qv = {
 				.login = gurl.owner,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryOwnerGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryOwnerGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryOwnerGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// owning user
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryUserGraphql qv = {
 				.login = gurl.owner,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryUserGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryUserGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryUserGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// owning organization
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryOrganizationGraphql qv = {
 				.login = gurl.owner,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryOrganizationGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryOrganizationGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryOrganizationGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// repo info
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryRepositoryGraphql qv = {
 				.owner = gurl.owner,
-				.name  = gurl.reponame,
+				.name = gurl.reponame,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryRepositoryGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryRepositoryGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryRepositoryGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// repo's issues
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryIssuesGraphql qv = {
 				.owner = gurl.owner,
-				.name  = gurl.reponame,
+				.name = gurl.reponame,
 				.count = 10,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryIssuesGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryIssuesGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryIssuesGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// repo's PRs
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryPullrequestsGraphql qv = {
 				.owner = gurl.owner,
-				.name  = gurl.reponame,
+				.name = gurl.reponame,
 				.count = 10,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryPullrequestsGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryPullrequestsGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryPullrequestsGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// my gists
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryGistsGraphql qv = {
 				.owner = gurl.owner,
 				.count = 10,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryGistsGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryGistsGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryGistsGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 
 		// my repos
 		{
-			char recvBuffer[65535] = {};
+			GearsResponse response = {
+				.buffer = NULL,
+				.size = 0,
+				.alloc = malloc,
+				.free = free,
+			};
+
 			GithubQueryRepositoriesGraphql qv = {
 				.owner = gurl.owner,
 				.count = 10,
 			};
+
 			int bufsize = snprintJsonRequest_GithubQueryRepositoriesGraphql(NULL, 0, &qv);
-			char buffer[bufsize+1];
-			snprintJsonRequest_GithubQueryRepositoriesGraphql(buffer, bufsize+1, &qv);
+			char buffer[bufsize + 1];
+			snprintJsonRequest_GithubQueryRepositoriesGraphql(buffer, bufsize + 1, &qv);
 			gears_println("buffer: %s", buffer);
-			int res = proto_postRequest(gce_grql.value, gce_token.value, buffer, recvBuffer, sizeof(recvBuffer));
+			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
-			gears_println("%s", recvBuffer);
+			gears_println("%s", response.buffer);
+			response.free(response.buffer);
 		}
 	}
 
