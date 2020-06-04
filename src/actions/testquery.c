@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <git2.h>
 #include <unistd.h>
+#include <jsmn.h>
 
 
 static struct
@@ -75,6 +76,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -98,6 +111,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, (int)(tokens[i].end - tokens[i].start), response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, (int)(tokens[i].end - tokens[i].start), tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -121,6 +146,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -144,6 +181,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -168,6 +217,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -193,6 +254,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -218,6 +291,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -242,6 +327,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 
@@ -266,6 +363,18 @@ int TestQuery(int argc, char** argv)
 			int res = gears_httpPost(gce_grql.value, gce_token.value, buffer, &response);
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
+
+			jsmn_parser p;
+			jsmn_init(&p);
+			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
+			gears_println("%i tokens", jtCount);
+			jsmntok_t tokens[jtCount];
+			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
+			for (int i = 0; i < jtCount; i++)
+			{
+				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
+				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
+			}
 			response.free(response.buffer);
 		}
 	}
