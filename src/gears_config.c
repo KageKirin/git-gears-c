@@ -1,6 +1,7 @@
 #include "gears_config.h"
 #include "gears_constants.h"
 #include "gears_gitutil.h"
+#include "gears_request.h"
 #include "gears_util.h"
 
 #include <assert.h>
@@ -37,7 +38,7 @@ int gears_checkConfig(const char* hostname, const char* subname)
 		{
 			if (strstr(gce.value, hostname))
 			{
-				return proto_getRequest(gce.value, NULL);
+				return gears_httpGet(gce.value, NULL, NULL);
 			}
 		}
 		return -1;
@@ -50,7 +51,7 @@ int gears_checkConfig(const char* hostname, const char* subname)
 		{
 			if (strstr(gce.value, hostname))
 			{
-				return proto_getRequest(gce.value, NULL);
+				return gears_httpGet(gce.value, NULL, NULL);
 			}
 		}
 		return -1;
@@ -62,7 +63,7 @@ int gears_checkConfig(const char* hostname, const char* subname)
 		GitConfigEntry gce_rest = gears_getGearsConfigEntry(hostname, kConfigAPIEndpointRest);
 		if (gce.value[0])
 		{
-			return proto_getRequest(gce_rest.value, gce.value);
+			return gears_httpGet(gce_rest.value, gce.value, NULL);
 		}
 		return -1;
 	}
