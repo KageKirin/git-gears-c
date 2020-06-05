@@ -3,6 +3,7 @@
 #include "gears_giturl.h"
 #include "gears_gitutil.h"
 #include "gears_option.h"
+#include "gears_parse.h"
 #include "gears_request.h"
 #include "gears_util.h"
 
@@ -15,8 +16,8 @@
 #include <curl/curl.h>
 #include <fcntl.h>
 #include <git2.h>
-#include <unistd.h>
 #include <jsmn.h>
+#include <unistd.h>
 
 
 static struct
@@ -60,7 +61,7 @@ int TestQuery(int argc, char** argv)
 	{
 		gears_println("query: %s", g_github_query_viewer_graphql_data);
 
-		// current user
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "current user");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -77,21 +78,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// owner (org or user)
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "owner (org or user)");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -112,21 +103,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, (int)(tokens[i].end - tokens[i].start), response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, (int)(tokens[i].end - tokens[i].start), tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// owning user
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "owning user");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -147,21 +128,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// owning organization
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "owning organization");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -182,21 +153,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// repo info
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "repo info");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -218,21 +179,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// repo's issues
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "this repo's issues");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -244,7 +195,7 @@ int TestQuery(int argc, char** argv)
 			GithubQueryIssuesGraphql qv = {
 				.owner = gurl.owner,
 				.name = gurl.reponame,
-				.count = 10,
+				.count = 100,
 			};
 
 			int bufsize = snprintJsonRequest_GithubQueryIssuesGraphql(NULL, 0, &qv);
@@ -255,21 +206,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// repo's PRs
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "this repo's PRs");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -281,7 +222,7 @@ int TestQuery(int argc, char** argv)
 			GithubQueryPullrequestsGraphql qv = {
 				.owner = gurl.owner,
 				.name = gurl.reponame,
-				.count = 10,
+				.count = 100,
 			};
 
 			int bufsize = snprintJsonRequest_GithubQueryPullrequestsGraphql(NULL, 0, &qv);
@@ -292,21 +233,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// my gists
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "my gists");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -317,7 +248,7 @@ int TestQuery(int argc, char** argv)
 
 			GithubQueryGistsGraphql qv = {
 				.owner = gurl.owner,
-				.count = 10,
+				.count = 100,
 			};
 
 			int bufsize = snprintJsonRequest_GithubQueryGistsGraphql(NULL, 0, &qv);
@@ -328,21 +259,11 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 
-		// my repos
+		gears_logln(stdout, gearsio_green "%s" gearsio_reset, "my repos");
 		{
 			GearsResponse response = {
 				.buffer = NULL,
@@ -353,7 +274,7 @@ int TestQuery(int argc, char** argv)
 
 			GithubQueryRepositoriesGraphql qv = {
 				.owner = gurl.owner,
-				.count = 10,
+				.count = 100,
 			};
 
 			int bufsize = snprintJsonRequest_GithubQueryRepositoriesGraphql(NULL, 0, &qv);
@@ -364,17 +285,7 @@ int TestQuery(int argc, char** argv)
 			gears_println("query res: %i", res);
 			gears_println("%s", response.buffer);
 
-			jsmn_parser p;
-			jsmn_init(&p);
-			int jtCount = jsmn_parse(&p, response.buffer, response.size, NULL, 0);
-			gears_println("%i tokens", jtCount);
-			jsmntok_t tokens[jtCount];
-			int parseOk = jsmn_parse(&p, response.buffer, response.size, tokens, jtCount);
-			for (int i = 0; i < jtCount; i++)
-			{
-				//gears_println("[%i] %i: %*.s", i, tokens[i].type, tokens[i].size, response.buffer + tokens[i].start);
-				gears_println("[%i] %i: %i %i", i, tokens[i].type, tokens[i].size, tokens[i].start);
-			}
+			// proto_parse(response.buffer, response.size);
 			response.free(response.buffer);
 		}
 	}
