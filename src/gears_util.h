@@ -6,6 +6,8 @@
 /// printing functions
 #define gears_printf(str, ...) (printf(str, __VA_ARGS__))
 #define gears_println(str, ...) (printf(str "\n", __VA_ARGS__))
+struct jsmntok;
+void gears_printJsmntok(const struct jsmntok*, const char* json);
 
 #define gears_logln(out, str, ...) (fprintf(out, str "\n", __VA_ARGS__))
 #define gears_wrnln(str, ...) (gears_logln(stderr, gearsio_yellow str gearsio_reset, __VA_ARGS__))
