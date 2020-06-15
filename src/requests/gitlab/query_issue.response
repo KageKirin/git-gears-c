@@ -1,0 +1,18 @@
+return {
+	data =
+	{
+		project =
+		{
+			id = "ID",
+			name = "String",
+			webUrl = "URL",
+			issue =
+			{
+				iid = "ID", -- "Int"
+				title = "String",
+				description = "String",
+				webUrl = "URL",
+			}
+		}
+	}
+}

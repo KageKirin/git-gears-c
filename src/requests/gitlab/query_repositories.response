@@ -1,0 +1,21 @@
+return {
+	data =
+	{
+		namespace =
+		{
+			projects =
+			{
+				nodes =
+				{{
+					id = "ID",
+					webUrl = "URL",
+					name = "String",
+					description = "String",
+					fullPath = "String",
+					createdAt = "String",
+					lastActivityAt = "String",
+				},}
+			}
+		}
+	}
+}

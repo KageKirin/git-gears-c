@@ -1,0 +1,25 @@
+return {
+	data =
+	{
+		project =
+		{
+			id = "ID",
+			name = "String",
+			webUrl = "URL",
+			mergeRequests =
+			{
+				nodes =
+				{{
+					id = "ID",
+					targetBranch = "String",
+					sourceBranch = "String",
+					iid = "ID", -- "Int"
+					description = "String",
+					mergeStatus = "String",
+					title = "String",
+					webUrl = "URL",
+				},}
+			}
+		}
+	}
+}

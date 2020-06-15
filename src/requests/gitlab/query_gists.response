@@ -1,0 +1,22 @@
+return {
+	data =
+	{
+		currentUser =
+		{
+			snippets =
+			{
+				nodes =
+				{{
+					id = "ID",
+					title = "String",
+					description = "String",
+					createdAt = "String",
+					updatedAt = "String",
+					fileName = "String",
+					content = "String",
+					webUrl = "URL",
+				},}
+			}
+		}
+	}
+}

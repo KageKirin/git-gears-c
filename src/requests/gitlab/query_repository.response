@@ -1,0 +1,15 @@
+return {
+	data =
+	{
+		project =
+		{
+			id = "ID",
+			webUrl = "URL",
+			name = "String",
+			description = "String",
+			fullPath = "String",
+			createdAt = "String",
+			lastActivityAt = "String",
+		}
+	}
+}
