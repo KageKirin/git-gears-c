@@ -1,0 +1,17 @@
+return {
+	data =
+	{
+		user =
+		{
+			id = "ID",
+			name = "String",
+			login = "String",
+			email = "String",
+			url = "URL",
+
+			bio = "String",
+			company = "String",
+			websiteUrl = "URL",
+		}
+	}
+}

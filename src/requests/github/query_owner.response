@@ -1,0 +1,25 @@
+return {
+	data =
+	{
+		organization =
+		{
+			id = "ID",
+			name = "String",
+			login = "String",
+			email = "String",
+			url = "URL",
+		},
+
+		user =
+		{
+			id = "ID",
+			name = "String",
+			login = "String",
+			email = "String",
+			url = "URL",
+		}
+	}
+}
+
+-- {"data":{"organization":{"id":"MDEyOk9yZ2FuaXphdGlvbjQ1OTYwMjYw","name":"CppScaffolding","login":"CppScaffolding","email":null,"url":"https://github.com/CppScaffolding"},"user":null},"errors":[{"type":"NOT_FOUND","path":["user"],"locations":[{"line":12,"column":2}],"message":"Could not resolve to a User with the login of 'CppScaffolding'."}]}
+-- {"data":{"organization":null,"user":{"id":"MDQ6VXNlcjU5NDQ5NA==","name":"Christian Helmich","login":"KageKirin","email":"kagekirin@gmail.com","url":"https://github.com/KageKirin"}},"errors":[{"type":"NOT_FOUND","path":["organization"],"locations":[{"line":4,"column":2}],"message":"Could not resolve to an Organization with the login of 'KageKirin'."}]}

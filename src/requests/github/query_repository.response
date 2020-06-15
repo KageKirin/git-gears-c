@@ -1,0 +1,16 @@
+return {
+	data =
+	{
+		repository =
+		{
+			id = "ID",
+			url = "URL",
+			name = "String",
+			description = "String",
+			homepageUrl = "URL",
+			nameWithOwner = "String",
+			createdAt = "String",
+			pushedAt = "String",
+		}
+	}
+}

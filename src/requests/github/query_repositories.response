@@ -1,0 +1,22 @@
+return {
+	data =
+	{
+		user =
+		{
+			repositoriesContributedTo =
+			{
+				nodes =
+				{{
+					id = "ID",
+					url = "URL",
+					name = "String",
+					description = "String",
+					homepageUrl = "URL",
+					nameWithOwner = "String",
+					createdAt = "String",
+					pushedAt = "String",
+				},}
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+return {
+	data =
+	{
+		user =
+		{
+			gist =
+			{
+				id = "ID",
+				name = "String",
+				description = "String",
+				createdAt = "String",
+				pushedAt = "String",
+				files =
+				{{
+					name = "String",
+					text = "String",
+				},}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+return {
+	data =
+	{
+		repository =
+		{
+			id = "ID",
+			name = "String",
+			url = "URL",
+			issues =
+			{
+				nodes =
+				{{
+					number = "Int",
+					bodyText = "String",
+					state = "String",
+					title = "String",
+					url = "URL",
+				},}
+			}
+		}
+	}
+}

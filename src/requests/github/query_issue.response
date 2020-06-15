@@ -1,0 +1,19 @@
+return {
+	data =
+	{
+		repository =
+		{
+			id = "ID",
+			name = "String",
+			url = "URL",
+			issue =
+			{
+				number = "Int",
+				bodyText = "String",
+				state = "String",
+				title = "String",
+				url = "URL",
+			}
+		}
+	}
+}

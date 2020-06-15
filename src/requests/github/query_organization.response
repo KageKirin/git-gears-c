@@ -1,0 +1,17 @@
+return {
+	data =
+	{
+		organization =
+		{
+			id = "ID",
+			name = "String",
+			login = "String",
+			email = "String",
+			url = "URL",
+			description = "String",
+
+			projectsUrl = "URL",
+			websiteUrl = "URL",
+		}
+	}
+}

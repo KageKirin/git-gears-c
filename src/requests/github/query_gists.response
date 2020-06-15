@@ -1,0 +1,24 @@
+return {
+	data =
+	{
+		user =
+		{
+			gists =
+			{
+				nodes =
+				{{
+					id = "ID",
+					name = "String",
+					description = "String",
+					createdAt = "String",
+					pushedAt = "String",
+					files = 
+					{{
+						name = "String",
+						text = "String",
+					},}
+				},}
+			}
+		}
+	}
+}
