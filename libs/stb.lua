@@ -27,9 +27,18 @@ return {
 	end,
 
 	_add_self_links = function()
+		links { "stb" }
 	end,
 
 	_create_projects = function()
+		project "stb"
+		kind "StaticLib"
+		language "C"
+
+		files {
+			path.join(stb_root, "*.h"),
+			path.join(stb_root, "*.c"),
+		}
 	end,
 	
 	_refresh_project = function()
