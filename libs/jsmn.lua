@@ -9,7 +9,7 @@ jsmn_includedirs = {
 
 jsmn_libdirs = {}
 jsmn_links = {}
-jsmn_defines = {}
+jsmn_defines = { "JSMN_HEADER" }
 
 ----
 return {
@@ -18,6 +18,7 @@ return {
 	end,
 
 	_add_defines = function()
+		defines { jsmn_defines }
 	end,
 
 	_add_libdirs = function()
@@ -27,9 +28,18 @@ return {
 	end,
 
 	_add_self_links = function()
+		links { "jsmn" }
 	end,
 
 	_create_projects = function()
+		project "jsmn"
+		kind "StaticLib"
+		language "C"
+
+		files {
+			path.join(jsmn_root, "jsmn.h"),
+			path.join(jsmn_root, "jsmn.c"),
+		}
 	end,
 
 	_refresh_project = function()
